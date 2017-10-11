@@ -1,0 +1,8 @@
+﻿  Combat.cpp
+c:\users\charles\documents\visual studio 2015\projects\heros quest\heros quest\combat.cpp(23): warning C4018: '<': signed/unsigned mismatch
+c:\users\charles\documents\visual studio 2015\projects\heros quest\heros quest\combat.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\charles\documents\visual studio 2015\projects\heros quest\heros quest\combat.cpp(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\charles\documents\visual studio 2015\projects\heros quest\heros quest\combat.cpp(50): warning C4018: '<=': signed/unsigned mismatch
+c:\users\charles\documents\visual studio 2015\projects\heros quest\heros quest\combat.cpp(132): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Heros Quest.vcxproj -> C:\Users\Charles\documents\visual studio 2015\Projects\Heros Quest\Debug\Heros Quest.exe
+  Heros Quest.vcxproj -> C:\Users\Charles\documents\visual studio 2015\Projects\Heros Quest\Debug\Heros Quest.pdb (Partial PDB)
