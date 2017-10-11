@@ -51,11 +51,19 @@ void Character::takeDamage(int damage) {
 	int intDefence = characterDefend();
 	if (damage > intDefence) {
 		damage = damage - intDefence;
+		cout << "You have hit for " << damage << " damage." << endl;
 		intHealth = intHealth - damage;
-		if (intHealth == 0) {
-
+		if (intHealth < 0) {
+			intHealth = 0;
 		}
 	}
+	else {
+		cout << "You missed!" << endl;
+	}
+}
+
+void Character::resetSpecial() {
+	boolUsedSpecialAttack = false;
 }
 
 

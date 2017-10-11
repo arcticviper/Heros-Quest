@@ -5,8 +5,18 @@ using namespace std;
 Combat::Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter){
 	playerParty = PlayableCharacter;
 	monsterParty = NonPlayableCharacter;
-	//checks life of party
+	
+	//set special attacks to false for combat
+	for (int i = 0; i < playerParty.size(); i++) {
+		playerParty[i].resetSpecial(); 
+	}
+	//loops through mobs
+	for (int i = 0; i < monsterParty.size(); i++) {
+		monsterParty[i].resetSpecial();
+	}
 	while (playerParty.size() > 0 || monsterParty.size() > 0) {
+		//checks life of party
+
 		//if party is dead
 		if (playerParty.size() == 0) {
 			cout << "Your party is dead." << endl;
@@ -40,15 +50,28 @@ void Combat::playerCombat(Player thePlayer){
 	int intAttackChoice = 0;
 	bool boolValidChoice = false; //ensuring choice is valid
 	//selecting monster
-	cout << "Which monster do you want to attack?" << endl;
+	if (monsterParty.size() == 1) {
+		cout << "There is only one monster left." << endl;
+	}
+	else {
+		cout << "Which monster do you want to attack?" << endl;
+	}
 	for (int i = 0; i < monsterParty.size(); i++) {
 		cout << i + 1 << ". HP: "<< monsterParty[i].getHealth() << "\t" << "Name: " << monsterParty[i].getName() << endl; //displays as: 1. HP: 99	Name: Mobname
 	}
 	//while monsterchoice is greater than 0 and less than or equal to party size, ask for input
 	while (boolValidChoice == false) {
-		intMonsterChoice = int(makeCharChoice("What monster would you like to select?") - '0');
-		if ((intMonsterChoice > 0) && (intMonsterChoice <= monsterParty.size())) {
+		//if party size is 1, default to remaining monster
+		if (monsterParty.size() == 1){
+			intMonsterChoice = 1;
 			boolValidChoice = true;
+		}
+		else {
+			//else pick a monster
+			intMonsterChoice = int(makeCharChoice("What monster would you like to select?") - '0');
+			if ((intMonsterChoice > 0) && (intMonsterChoice <= monsterParty.size())) {
+				boolValidChoice = true;
+			}
 		}
 	}
 	boolValidChoice = false;
@@ -87,7 +110,7 @@ void Combat::playerCombat(Player thePlayer){
 		break;
 	}
 	if (monsterParty[intMonsterChoice].getHealth() <= 0) {
-		cout << "The monster is dead";
+		cout << "The monster: "<< monsterParty[intMonsterChoice].getName() << " is dead" << endl;
 		monsterParty.erase(monsterParty.begin() + intMonsterChoice);
 	}
 
@@ -98,6 +121,10 @@ void Combat::monsterCombat(Monster theMonster){
 	intPlayerChoice = rand() % playerParty.size();
 	// Attacks the player
 	playerParty[intPlayerChoice].takeDamage(theMonster.characterAttack());
+	if (playerParty[intPlayerChoice].getHealth() <= 0) {
+		cout << "The monster: " << monsterParty[intPlayerChoice].getName() << " is dead" << endl;
+		monsterParty.erase(monsterParty.begin() + intPlayerChoice);
+	}
 }
 void Combat::itemMenu(Player thePlayer){
 	thePlayer;

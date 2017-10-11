@@ -1,4 +1,6 @@
 #include "Player.h"
+#include <iostream>
+using namespace std;
 
 Player::Player () : Character(){
 	intPrizeMoney = 0;
@@ -14,6 +16,10 @@ Player::Player(std::string name, int health, int attack, int defence, int specia
 
 int Player::specialAttack()
 {
+	if (boolUsedSpecialAttack == true) {
+		cout << "You have used your special attack already" << endl;
+		return(Player::characterAttack());
+	}
 	boolUsedSpecialAttack = true;
 	return (Player::characterAttack() + intSpecialAttack);
 }
@@ -61,3 +67,5 @@ int Player::playerDodge()
 	boolUsedDodge = true;
 	return Player::characterDefend() + rand() % 6 + 1;
 }
+
+

@@ -26,4 +26,3 @@ int Monster::getPrizeMoney()
 {
 	return intPrizeMoney;
 }
-

@@ -17,12 +17,14 @@ public:
 	int characterDefend(int intMin, int intMax); // runs defence with adjusted min/max values
 	void takeDamage(int intDamage);
 	void useItem(int intItemNumber);
+	void resetSpecial();
 
 protected:
 	int intHealth; //health variable
 	std::string strName; //name variable
 	int intAttack; //Attack stats
 	int intDefence; //defence stats
+	bool boolUsedSpecialAttack; //used special attack
 private:
 	
 
