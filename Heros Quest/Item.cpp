@@ -11,12 +11,13 @@ Item::Item(){
 	SPATKChange = 0;
 }
 
-Item::Item(std::string newItemName, int HPEffect, int ATKEffect, int DEFEffect, int SPATKEffect){
+Item::Item(std::string newItemName, int HPEffect, int ATKEffect, int DEFEffect, int SPATKEffect, bool TEMPEffect){
 	itemName = newItemName;
 	HPChange = HPEffect;
 	ATKChange = ATKEffect;
 	DEFChange = DEFEffect;
 	SPATKChange = SPATKEffect;
+	boolTemporary = TEMPEffect;
 }
 
 std::string Item::getDetails()
@@ -37,6 +38,10 @@ std::string Item::getDetails()
 		sstream << "\t" << "SPATK: " << SPATKChange;
 	}
 	sstream << endl;
-
 	return sstream.str();
+}
+
+std::vector<int> Item::getStats(){
+	vector<int> itemStats = { HPChange , ATKChange , DEFChange, SPATKChange };
+	return itemStats;
 }

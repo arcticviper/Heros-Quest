@@ -34,6 +34,7 @@ void Combat::execute_Combat(std::vector<Player> PlayableCharacter, std::vector<M
 			//loops through playable character
 			for (int i = 0; i < playerParty.size(); i++) {
 				//cout << playerParty[i].getHealth() <<endl;
+				cout << i + 1 << ". HP: " << playerParty[i].getHealth() << "\t" << "Name: " << playerParty[i].getName() << endl; //displays as: 1. HP: 99	Name: Mobname
 				playerCombat(playerParty[i],i); //runs combat options
 			}
 			//loops through mobs
@@ -62,21 +63,16 @@ void Combat::playerCombat(Player thePlayer, int intPlayer){
 		cout << i + 1 << ". HP: "<< monsterParty[i].getHealth() << "\t" << "Name: " << monsterParty[i].getName() << endl; //displays as: 1. HP: 99	Name: Mobname
 	}
 	//while monsterchoice is greater than 0 and less than or equal to party size, ask for input
-	while (boolValidChoice == false) {
-		//if party size is 1, default to remaining monster
-		if (monsterParty.size() == 1){
-			intMonsterChoice = 1;
-			boolValidChoice = true;
-		}
-		else {
-			//else pick a monster
-			intMonsterChoice = int(makeCharChoice("What monster would you like to select?") - '0');
-			if ((intMonsterChoice > 0) && (intMonsterChoice <= monsterParty.size())) {
-				boolValidChoice = true;
-			}
-		}
+	//if party size is 1, default to remaining monster
+	if (monsterParty.size() == 1){
+		intMonsterChoice = 1;
+	}
+	else {
+		//else pick a monster
+		intMonsterChoice = makeIntChoice("What monster would you like to select?", 1, monsterParty.size());
 	}
 	boolValidChoice = false;
+	//sets it to array readable values
 	intMonsterChoice = intMonsterChoice - 1;
 
 	cout << "You have selected: " << monsterParty[intMonsterChoice].getName() << endl << endl;
@@ -89,35 +85,42 @@ void Combat::playerCombat(Player thePlayer, int intPlayer){
 	cout << "5. Item" << endl; //Opens item inventory, if item is used, sacrifice turn
 	cout << "6. Save (saves current level+stats)" << endl; //Saves current game, not current state
 
-	//asks for input
-	
+	//resets if spatk or dodge has been used or cancels item use
 	while (boolValidChoice == false) {
-		intPlayerOption = int(makeCharChoice("What would you like to select?") - '0');
-		if ((intPlayerOption > 0) && (intPlayerOption <= 6)) {
+		intPlayerOption = makeIntChoice("What would you like to select?", 1, 6);
+		switch (intPlayerOption) {
+		case 1:
+			monsterParty[intMonsterChoice].takeDamage(thePlayer.characterAttack(2, 4));
 			boolValidChoice = true;
+			break;
+		case 2:
+			monsterParty[intMonsterChoice].takeDamage(thePlayer.characterAttack());
+			boolValidChoice = true;
+			break;
+		case 3:
+			if (thePlayer.getSpecial() == true) {
+				cout << "You have used your special attack already" << endl;
+				break;
+			}
+			else {
+				monsterParty[intMonsterChoice].takeDamage(thePlayer.specialAttack());
+				//save special attack state
+				playerParty[intPlayer] = thePlayer;
+				break;
+			}
+		case 4:
+			cout << "Your defence is now: " << thePlayer.playerDodge() << "." << endl;
+			playerParty[intPlayer] = thePlayer;
+			break;
+		case 5:
+			thePlayer.displayItem();
+			itemMenu(thePlayer, intPlayer);
+			break;
+		case 6:
+			break;
 		}
 	}
-	switch (intPlayerOption) {
-	case 1: 
-		monsterParty[intMonsterChoice].takeDamage(thePlayer.characterAttack(2,4));
-		break;
-	case 2: 
-		monsterParty[intMonsterChoice].takeDamage(thePlayer.characterAttack());
-		break;
-	case 3: 
-		monsterParty[intMonsterChoice].takeDamage(thePlayer.specialAttack());
-		//save special attack state
-		playerParty[intPlayer] = thePlayer;
-		break;
-	case 4: 
-		thePlayer.playerDodge();
-		break;
-	case 5: 
-		itemMenu(thePlayer);
-		break;
-	case 6:
-		break;
-	}
+	
 	if (monsterParty[intMonsterChoice].getHealth() <= 0) {
 		cout << "The monster: "<< monsterParty[intMonsterChoice].getName() << " is dead" << endl;
 		monsterParty.erase(monsterParty.begin() + intMonsterChoice);
@@ -148,8 +151,14 @@ void Combat::monsterCombat(Monster theMonster, int intMonster){
 	}
 }
 
-void Combat::itemMenu(Player thePlayer){
-	thePlayer.getitems;
+void Combat::itemMenu(Player thePlayer, int intPlayer){
+	int itemChoice;
+	itemChoice = makeIntChoice("Which item would you like to use?", 1, thePlayer.getBagsize());
+	itemChoice = itemChoice - 1;
+	// uses item
+	thePlayer.useItem(itemChoice);
+	//save player
+	playerParty[intPlayer] = thePlayer;
 }
 
 //limit input to string
@@ -162,6 +171,18 @@ string Combat::makeStringChoice(string strQuestion) {
 		getline(cin, choice);
 	}
 	return choice;
+}
+
+int Combat::makeIntChoice(std::string strQuestion, int lowerLimit, int upperLimit){
+	int intPlayerOption;
+	int boolValidChoice = false;
+	while (boolValidChoice == false) {
+		intPlayerOption = stoi(makeStringChoice(strQuestion));
+		if ((intPlayerOption >= lowerLimit) && (intPlayerOption <= upperLimit)) {
+			boolValidChoice = true;
+		}
+	}
+	return intPlayerOption;
 }
 
 //limit input to char
@@ -187,13 +208,16 @@ char Combat::makeCharChoice(string strQuestion) {
 int main() {
 	srand(time(NULL));
 	Player test("testname", 10, 10, 10,5);
+	Item testItem("Fidget Spinner", 100, 50, 50, 50, false);
+	//test.addItem(testItem);
 	//cout << test.characterAttack() << endl;
 	//cout << test.characterDefend() << endl;
 	Monster mob1("Testmob", 10, 10, 10, 100);
+	Monster mob2("Testmob2", 100, 5, 5, 150);
 	//cout << mob1.characterAttack() << endl;
 	//cout << mob1.characterDefend() << endl;
 	vector<Player> plParty = { test };
-	vector<Monster> mbParty = { mob1 };
+	vector<Monster> mbParty = { mob1,mob2 };
 	Combat fight1(plParty, mbParty);
 	fight1.execute_Combat(plParty, mbParty);
 

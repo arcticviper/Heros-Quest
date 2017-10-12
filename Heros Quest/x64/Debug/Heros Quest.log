@@ -1,6 +1,13 @@
 ﻿  Player.cpp
+c:\users\charles\source\repos\heros-quest\heros quest\player.h(22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Item.cpp
   Combat.cpp
-c:\users\cden0003\source\repos\heros-quest\heros quest\combat.cpp(152): error C2039: 'getitems': is not a member of 'Player'
-  c:\users\cden0003\source\repos\heros-quest\heros quest\player.h(7): note: see declaration of 'Player'
-c:\users\cden0003\source\repos\heros-quest\heros quest\combat.cpp(188): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\charles\source\repos\heros-quest\heros quest\player.h(22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\charles\source\repos\heros-quest\heros quest\combat.cpp(72): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\charles\source\repos\heros-quest\heros quest\combat.cpp(209): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Character.cpp
   Generating Code...
+  Skipping... (no relevant changes detected)
+  Monster.cpp
+  Heros Quest.vcxproj -> C:\Users\Charles\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.exe
+  Heros Quest.vcxproj -> C:\Users\Charles\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.pdb (Partial PDB)

@@ -20,11 +20,12 @@ private:
 	void playerCombat(Player thePlayer,int intPlayer); //displays combat options
 	void monsterCombat(Monster theMonster,int intMonster); //displays combat options
 	//void monsterCombat(); //Manages AI combat
+	int makeIntChoice(std::string strQuestion, int lowerLimit, int upperLimit);
 	char makeCharChoice(std::string strQuestion); //code for string input verification
 	std::string makeStringChoice(std::string strQuestion); //code for char input verification
 	std::vector<Player> playerParty; //for holding players to easier manage players
 	std::vector<Monster> monsterParty; //for holding monsters to easier manage monsters
-	void itemMenu(Player thePlayer);
+	void itemMenu(Player thePlayer, int intPlayer);
 };
 
 #endif

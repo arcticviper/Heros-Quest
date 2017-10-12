@@ -16,10 +16,6 @@ Player::Player(std::string name, int health, int attack, int defence, int specia
 
 int Player::specialAttack()
 {
-	if (boolUsedSpecialAttack == true) {
-		cout << "You have used your special attack already" << endl;
-		return(Player::characterAttack());
-	}
 	boolUsedSpecialAttack = true;
 	return (Player::characterAttack() + intSpecialAttack);
 }
@@ -111,8 +107,36 @@ void Player::resetBuffs(){
 	replaceStats(stats[0], stats[1], stats[2], stats[3]);
 }
 
-void Player::useItem()
-{
+void Player::useItem(int elementNumber){
+	//prints out itemname
+	cout << "You have chosen " << bag[elementNumber].getDetails() << endl;
+	//stores stats in element
+	vector<int> tempStats;
+	tempStats = bag[elementNumber].getStats();
+	//if the item is temporary then buff temporarily
+	if (bag[elementNumber].getTemp() == true) {
+		addBuffs(tempStats[0], tempStats[1], tempStats[2], tempStats[3]);
+	}
+	//else add stats
+	else {
+		addStats(tempStats[0], tempStats[1], tempStats[2], tempStats[3]);
+	}
+	//delete's item from bag
+	bag.erase(bag.begin() + elementNumber);
+	
+}
+
+void Player::displayItem(){
+	cout << "Displaying items: " << endl;
+	for (int i = 0; i < bag.size(); i++) {
+		cout << i+1 << ". " <<  bag[i].getDetails();
+	}
+	cout << endl;
+}
+
+void Player::addItem(Item newItem){
+	bag.push_back(newItem);
+	cout << "The new item: " << newItem.getName() << "has been added to your inventory." << endl;
 }
 
 

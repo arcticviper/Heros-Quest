@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Character.h"
+#include "Item.h"
 #include <vector>
 //Player Template, inherits Character
 
@@ -15,7 +16,10 @@ public:
 	void replaceStatsNoCap(int health, int attack, int defence, int specialAttack); // replaces existing stats without cap
 	int playerDodge(); // rolls 1-6 on top of defence
 	void resetBuffs(); // resets all the buffs implemented
-	void useItem(); // 
+	void useItem(int elementNumber); // use item by picking element number
+	void displayItem(); // displays items in bag
+	void addItem(Item newItem); // adds new item
+	int getBagsize() { return bag.size(); }
 
 
 protected:
@@ -23,7 +27,7 @@ protected:
 	int intPrizeMoney; //prize money recieved
 	int intSpecialAttack; //special attack stat
 	bool boolUsedDodge; //used special attack
-	// std::vector<Item> bag; // bag for items
+	std::vector<Item> bag; // bag for items
 	std::vector<int> stats ; // buffs that are utilised for a single turn
 
 private:

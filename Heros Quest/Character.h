@@ -11,12 +11,12 @@ public:
 	int getAttack() { return intAttack; } //outputs attack
 	std::string getName() { return strName; } //returns name
 	int getHealth() { return intHealth; } //outputs attack
+	bool getSpecial() { return boolUsedSpecialAttack; };
 	int characterAttack(); // runs the 1-6+skill for attack
 	int characterAttack(int intMin,int intMax); // runs attack with adjusted min/max values
 	int characterDefend(); // runs the 1-6+skill for defence
 	int characterDefend(int intMin, int intMax); // runs defence with adjusted min/max values
 	void takeDamage(int intDamage);
-	void useItem(int intItemNumber);
 	void resetSpecial();
 
 protected:
