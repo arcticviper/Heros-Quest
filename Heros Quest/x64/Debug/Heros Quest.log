@@ -1,0 +1,6 @@
+﻿  Player.cpp
+  Combat.cpp
+c:\users\cden0003\source\repos\heros-quest\heros quest\combat.cpp(152): error C2039: 'getitems': is not a member of 'Player'
+  c:\users\cden0003\source\repos\heros-quest\heros quest\player.h(7): note: see declaration of 'Player'
+c:\users\cden0003\source\repos\heros-quest\heros quest\combat.cpp(188): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...

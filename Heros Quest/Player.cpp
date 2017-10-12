@@ -25,47 +25,94 @@ int Player::specialAttack()
 }
 
 void Player::addStats(int health, int attack, int defence, int specialAttack){
+	// define variables to cap max stats
+	int intHealthCap;
+	int intAttackCap;
+	int intDefenceCap;
+	int intSpecialAttackCap;
+	//calculates the changes can caps them if above a certain value.
+	intHealthCap = intHealth + health;
+	if (intHealth > 50) {
+		intHealth = 50;
+	}
+	intAttackCap = intAttack + attack;
+	if (intAttack > 10) {
+		intAttack = 10;
+	}
+	intDefenceCap = intDefence + defence;
+	if (intDefence > 10) {
+		intDefence = 10;
+	}
+	intSpecialAttackCap = intSpecialAttack + specialAttack;
+	if (intSpecialAttack > 10) {
+		intSpecialAttack = 10;
+	}
+	buffStats(intHealthCap, intAttackCap, intDefenceCap, intSpecialAttackCap,true);
+}
+
+void Player::buffStats(int health, int attack, int defence, int specialAttack,bool isPerm){
+	//if not perm, store stats in buff vector before changing
+	if (isPerm == false) {
+		stats = { intHealth ,intAttack ,intDefence ,intSpecialAttack };
+	}
+	//sets changes
 	intHealth = intHealth + health;
-	if (intHealth > 50) {
-		intHealth = 50;
-	}
 	intAttack = intAttack + attack;
-	if (intAttack > 10) {
-		intAttack = 10;
-	}
 	intDefence = intDefence + defence;
-	if (intDefence > 10) {
-		intDefence = 10;
-	}
 	intSpecialAttack = intSpecialAttack + specialAttack;
-	if (intSpecialAttack > 10) {
-		intSpecialAttack = 10;
-	}
 }
 
+//replaces player stats with new ones, restricting it to limits in the guideline
 void Player::replaceStats(int health, int attack, int defence, int specialAttack){
-	intHealth = health;
-	if (intHealth > 50) {
-		intHealth = 50;
+	//caps max health at 50
+	if (health > 50) {
+		health = 50;
 	}
-	intAttack = attack;
-	if (intAttack > 10) {
-		intAttack = 10;
+	//caps max attack at 10
+	if (attack > 10) {
+		attack = 10;
 	}
-	intDefence = defence;
-	if (intDefence > 10) {
-		intDefence = 10;
+	//caps max defence at 10
+	if (defence > 10) {
+		defence = 10;
 	}
-	intSpecialAttack = specialAttack;
-	if (intSpecialAttack > 10) {
-		intSpecialAttack = 10;
+	//caps max special Attack at 10
+	if (specialAttack > 10) {
+		specialAttack = 10;
 	}
+	//runs buffstats command
+	replaceStatsNoCap(health, attack, defence, specialAttack);
 }
 
-int Player::playerDodge()
+void Player::replaceStatsNoCap(int health, int attack, int defence, int specialAttack){
+	intHealth = health;
+	intAttack = attack;
+	intDefence = defence;
+	intSpecialAttack = specialAttack;
+}
+
+//buffs defence by 1-6 by adding it onto of stats
+int Player::playerDodge(){
+	int dodgeBuff;
+	dodgeBuff = rand() % 6 + 1;
+	//boolUsedDodge = true;
+	addBuffs(0, 0, dodgeBuff, 0);
+	return Player::characterDefend() + dodgeBuff;
+}
+
+void Player::addBuffs(int intHPBuff, int intATKBuff, int intDEFBuff, int intSPATKBuff){
+	//stores buffs in buff vector
+	buffStats(intHPBuff, intATKBuff, intDEFBuff, intSPATKBuff,false);
+	//adds stats to no
+}
+
+void Player::resetBuffs(){
+	// calls stats stored in saved stats
+	replaceStats(stats[0], stats[1], stats[2], stats[3]);
+}
+
+void Player::useItem()
 {
-	boolUsedDodge = true;
-	return Player::characterDefend() + rand() % 6 + 1;
 }
 
 

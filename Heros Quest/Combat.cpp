@@ -2,13 +2,15 @@
 #include <time.h>
 using namespace std;
 
-Combat::Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter){
+Combat::Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter) {
 	playerParty = PlayableCharacter;
 	monsterParty = NonPlayableCharacter;
-	
+}
+
+void Combat::execute_Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter){
 	//set special attacks to false for combat
 	for (int i = 0; i < playerParty.size(); i++) {
-		playerParty[i].resetSpecial(); 
+		playerParty[i].resetSpecial();
 	}
 	//loops through mobs
 	for (int i = 0; i < monsterParty.size(); i++) {
@@ -32,7 +34,7 @@ Combat::Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPl
 			//loops through playable character
 			for (int i = 0; i < playerParty.size(); i++) {
 				//cout << playerParty[i].getHealth() <<endl;
-				playerCombat(playerParty[i]); //runs combat options
+				playerCombat(playerParty[i],i); //runs combat options
 			}
 			//loops through mobs
 			for (int i = 0; i < monsterParty.size(); i++) {
@@ -43,7 +45,7 @@ Combat::Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPl
 	}
 }
 
-void Combat::playerCombat(Player thePlayer){
+void Combat::playerCombat(Player thePlayer, int intPlayer){
 	Monster mobParty; //used for selecting monster
 	int intMonsterChoice = 0; // int version of monster choice
 	int intPlayerOption = 0;
@@ -96,15 +98,22 @@ void Combat::playerCombat(Player thePlayer){
 		}
 	}
 	switch (intPlayerOption) {
-	case 1: monsterParty[intMonsterChoice].takeDamage(thePlayer.characterAttack(2,4));
+	case 1: 
+		monsterParty[intMonsterChoice].takeDamage(thePlayer.characterAttack(2,4));
 		break;
-	case 2: monsterParty[intMonsterChoice].takeDamage(thePlayer.characterAttack());
+	case 2: 
+		monsterParty[intMonsterChoice].takeDamage(thePlayer.characterAttack());
 		break;
-	case 3: monsterParty[intMonsterChoice].takeDamage(thePlayer.specialAttack());
+	case 3: 
+		monsterParty[intMonsterChoice].takeDamage(thePlayer.specialAttack());
+		//save special attack state
+		playerParty[intPlayer] = thePlayer;
 		break;
-	case 4: thePlayer.playerDodge();
+	case 4: 
+		thePlayer.playerDodge();
 		break;
-	case 5: itemMenu(thePlayer);
+	case 5: 
+		itemMenu(thePlayer);
 		break;
 	case 6:
 		break;
@@ -115,19 +124,32 @@ void Combat::playerCombat(Player thePlayer){
 	}
 
 }
-void Combat::monsterCombat(Monster theMonster){
+void Combat::monsterCombat(Monster theMonster, int intMonster){
 	// Randomly generates the player that will be attacking
 	int intPlayerChoice;
 	intPlayerChoice = rand() % playerParty.size();
-	// Attacks the player
-	playerParty[intPlayerChoice].takeDamage(theMonster.characterAttack());
+	//roll 25% chance at doing a special attack
+	int intSpecialRoll;
+	intSpecialRoll = rand() % 101; // 0-100
+	// if roll is at 75 or higher, do special attack
+	if (intSpecialRoll > 75) {
+		// Deals special attack and saves the special attack state
+		playerParty[intPlayerChoice].takeDamage(theMonster.specialAttack());
+		monsterParty[intPlayerChoice] = theMonster;
+	}
+	else {
+		// Attacks the player
+		playerParty[intPlayerChoice].takeDamage(theMonster.characterAttack());
+	}
+	
 	if (playerParty[intPlayerChoice].getHealth() <= 0) {
-		cout << "The monster: " << monsterParty[intPlayerChoice].getName() << " is dead" << endl;
-		monsterParty.erase(monsterParty.begin() + intPlayerChoice);
+		cout << "The player: " << playerParty[intPlayerChoice].getName() << " is dead" << endl;
+		playerParty.erase(playerParty.begin() + intPlayerChoice);
 	}
 }
+
 void Combat::itemMenu(Player thePlayer){
-	thePlayer;
+	thePlayer.getitems;
 }
 
 //limit input to string
@@ -173,6 +195,7 @@ int main() {
 	vector<Player> plParty = { test };
 	vector<Monster> mbParty = { mob1 };
 	Combat fight1(plParty, mbParty);
+	fight1.execute_Combat(plParty, mbParty);
 
 
 	system("pause");
