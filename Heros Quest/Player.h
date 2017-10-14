@@ -25,8 +25,7 @@ public:
 protected:
 	void addBuffs(int intHPBuff, int intATKBuff, int intDEFBuff, int intSPATKBuff);
 	int intPrizeMoney; //prize money recieved
-	int intSpecialAttack; //special attack stat
-	bool boolUsedDodge; //used special attack
+	bool boolUsedDodge; //used dodge
 	std::vector<Item> bag; // bag for items
 	std::vector<int> stats ; // buffs that are utilised for a single turn
 

@@ -41,6 +41,26 @@ std::string Item::getDetails()
 	return sstream.str();
 }
 
+std::string Item::getDetailsShort()
+{
+	stringstream sstream;
+	//if HP change is not 0, display HP stat
+	if (HPChange != 0) {
+		sstream << "\t" << "HP: " << HPChange;
+	}
+	if (ATKChange != 0) {
+		sstream << "\t" << "ATK: " << ATKChange;
+	}
+	if (DEFChange != 0) {
+		sstream << "\t" << "DEF: " << DEFChange;
+	}
+	if (SPATKChange != 0) {
+		sstream << "\t" << "SPATK: " << SPATKChange;
+	}
+	sstream << endl;
+	return sstream.str();
+}
+
 std::vector<int> Item::getStats(){
 	vector<int> itemStats = { HPChange , ATKChange , DEFChange, SPATKChange };
 	return itemStats;

@@ -14,8 +14,7 @@ Player::Player(std::string name, int health, int attack, int defence, int specia
 	boolUsedSpecialAttack = false;
 }
 
-int Player::specialAttack()
-{
+int Player::specialAttack(){
 	boolUsedSpecialAttack = true;
 	return (Player::characterAttack() + intSpecialAttack);
 }
@@ -28,27 +27,27 @@ void Player::addStats(int health, int attack, int defence, int specialAttack){
 	int intSpecialAttackCap;
 	//calculates the changes can caps them if above a certain value.
 	intHealthCap = intHealth + health;
-	if (intHealth > 50) {
-		intHealth = 50;
+	if (intHealthCap > 50) {
+		intHealthCap = 50;
 	}
 	intAttackCap = intAttack + attack;
-	if (intAttack > 10) {
-		intAttack = 10;
+	if (intAttackCap > 10) {
+		intAttackCap = 10;
 	}
 	intDefenceCap = intDefence + defence;
-	if (intDefence > 10) {
-		intDefence = 10;
+	if (intDefenceCap > 10) {
+		intDefenceCap = 10;
 	}
 	intSpecialAttackCap = intSpecialAttack + specialAttack;
-	if (intSpecialAttack > 10) {
-		intSpecialAttack = 10;
+	if (intSpecialAttackCap > 10) {
+		intSpecialAttackCap = 10;
 	}
-	buffStats(intHealthCap, intAttackCap, intDefenceCap, intSpecialAttackCap,true);
+	replaceStats(intHealthCap, intAttackCap, intDefenceCap, intSpecialAttackCap);
 }
 
-void Player::buffStats(int health, int attack, int defence, int specialAttack,bool isPerm){
+void Player::buffStats(int health, int attack, int defence, int specialAttack,bool isTemp){
 	//if not perm, store stats in buff vector before changing
-	if (isPerm == false) {
+	if (isTemp == true) {
 		stats = { intHealth ,intAttack ,intDefence ,intSpecialAttack };
 	}
 	//sets changes
@@ -76,7 +75,7 @@ void Player::replaceStats(int health, int attack, int defence, int specialAttack
 	if (specialAttack > 10) {
 		specialAttack = 10;
 	}
-	//runs buffstats command
+	//runs replace stats command
 	replaceStatsNoCap(health, attack, defence, specialAttack);
 }
 
@@ -91,20 +90,24 @@ void Player::replaceStatsNoCap(int health, int attack, int defence, int specialA
 int Player::playerDodge(){
 	int dodgeBuff;
 	dodgeBuff = rand() % 6 + 1;
-	//boolUsedDodge = true;
+	boolUsedDodge = true;
 	addBuffs(0, 0, dodgeBuff, 0);
-	return Player::characterDefend() + dodgeBuff;
+	return Player::intDefence + dodgeBuff;
 }
 
 void Player::addBuffs(int intHPBuff, int intATKBuff, int intDEFBuff, int intSPATKBuff){
 	//stores buffs in buff vector
-	buffStats(intHPBuff, intATKBuff, intDEFBuff, intSPATKBuff,false);
+	buffStats(intHPBuff, intATKBuff, intDEFBuff, intSPATKBuff,true);
 	//adds stats to no
 }
 
 void Player::resetBuffs(){
-	// calls stats stored in saved stats
-	replaceStats(stats[0], stats[1], stats[2], stats[3]);
+	// calls stats stored in saved stats if there are any saved for the player
+	if (stats.size() != 0) {
+		replaceStats(stats[0], stats[1], stats[2], stats[3]);
+	}
+	//resets temporary stored stats vector to nothing
+	stats.clear();
 }
 
 void Player::useItem(int elementNumber){

@@ -1,6 +1,7 @@
 #include "Character.h"
 #include <iostream>
 #include <time.h>
+#include <sstream>
 using namespace std;
 
 Character::Character()
@@ -9,6 +10,7 @@ Character::Character()
 	strName = "Undefined";
 	intAttack = 0;
 	intDefence = 0;
+	intSpecialAttack = 0;
 }
 
 Character::Character(std::string name, int health, int attack, int defence)
@@ -17,6 +19,7 @@ Character::Character(std::string name, int health, int attack, int defence)
 	strName = name;
 	intAttack = attack;
 	intDefence = defence;
+	intSpecialAttack = 0;
 }
 
 int Character::characterAttack(int intMin, int intMax)
@@ -45,6 +48,16 @@ int Character::characterDefend()
 	return characterDefend(1, 6);
 }
 
+string Character::displayStats() {
+	stringstream sstream;
+	sstream << "Name: " << Character::getName();
+	sstream << "\t" << "HP: " << Character::getHealth();
+	sstream << "\t" << "ATK: " << Character::getAttack();
+	sstream << "\t" << "DEF: " << Character::getDefence();
+	sstream << "\t" << "SPATK: " << Character::getSpecialAttack();
+	sstream << endl;
+	return sstream.str();
+}
 
 
 void Character::takeDamage(int damage) {

@@ -9,8 +9,10 @@ public:
 	Item(std::string itemName, int HPEffect, int ATKEffect, int DEFEffect, int SPATKEffect, bool TEMPEffect); //constructor that takes full input
 	std::string getName() { return itemName; } //returns name of item
 	std::string getDetails(); //gets all details of item that aren't 0
+	std::string getDetailsShort(); //gets all details of item that aren't 0 ignoring name
 	std::vector<int> getStats(); //returns effects as stat ints
 	bool getTemp() { return boolTemporary; } //gets item permanent values
+	Item getItem(); //randomly generates items
 private:
 	std::string itemName; //obvious
 	int HPChange; // how this items changes HP
