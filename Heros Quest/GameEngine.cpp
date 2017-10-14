@@ -10,12 +10,14 @@ GameEngine::GameEngine(){
 	Monsters = {};
 	//Loot = {};
 	//populate items, may change in future
-	Loot = FillLoot();
+	vector<Item*> tempLoot = FillLoot();
+	Loot.insert(Loot.begin(), tempLoot.begin(), tempLoot.end());
 	srand(time(NULL)); //initialises random items
 
 }
 
 void GameEngine::PlayGame(){
+	int modes;
 	cout << "Welcome to Hero's Quest!" << endl;
 	cout << "There are 4 Different modes:" << endl;
 	//display menu
@@ -25,8 +27,20 @@ void GameEngine::PlayGame(){
 	cout << "3. Normal Mode - 4 on 4 combat with standard drop rates." << endl; // 50% item loot
 	cout << "4. Hard Mode - 1 on 4 combat with lowered drop rates." << endl; // 25% item loot
 	//cout << "5. Custom Modes - Unique Challenges" << endl; //1 defence challenge, ect
-	cout << "Which mode would you like to select?" << endl;
-
+	modes = makeIntChoice("Which mode would you like to select?", 1, 4);
+	switch (modes)
+	{
+	case 1:
+		Basic();
+	case 2:
+		//Easy();
+	case 3:
+		//Normal();
+	case 4:
+		//Hard();
+	default:
+		break;
+	}
 }
 
 void GameEngine::Basic(){
@@ -46,26 +60,43 @@ void GameEngine::Basic(){
 	//while both vectors are not empty
 	vector<Player> SinglePlayer;
 	vector<Monster> SingleMonster;
-	while (Monsters.size() > 0 && Players.size > 0){
-		SinglePlayer[0] = *Players[0];
-		SingleMonster[0] = *Monsters[0];
+	while (Monsters.size() > 0 && Players.size() > 0){
+		//store players/monsters in temp vector
+		SinglePlayer.push_back(*Players[0]);
+		SingleMonster.push_back(*Monsters[0]);
 		//initialise combat
 		Combat SingleFight(SinglePlayer, SingleMonster);
+		//instance combat
 		SingleFight.execute_Combat(SinglePlayer, SingleMonster);
-		//return the current state of player if win
+		//return the current state of player
+		SinglePlayer = SingleFight.getPlayerResult();
+		SingleMonster = SingleFight.getMonsterResult();
+		//check if player has won
+		if (SingleMonster.size() == 0) {
+			cout << "You won the battle!" << endl;
+			//get prize money
+			SinglePlayer[0].addMoney(SinglePlayer[0].getHealth());
+			//add 20 health
+			SinglePlayer[0].addStats(20, 0, 0, 0);
+			//removes monster
+			Monsters.erase(Monsters.begin());
+		}
+
+		else if (SinglePlayer.size() == 0) {
+			cout << "You lose!" << endl;
+			cout << "Game over!" << endl;
+			break;
+		}
 		//give player skills to add
 
 		//give 50% chance of loot
 		int intLootChance;
 		intLootChance = rand() % 0 + 101;
-
+		if (intLootChance > 50); {
+			Players[0]->addItem(GetLoot());
+		}
 	}
-	if (Monsters.size() == 0) {
-
-	}
-	else if(Players.size > 0){
-
-	}
+	
 
 
 }
@@ -105,8 +136,15 @@ vector<Item*> GameEngine::FillLoot(){
 Item GameEngine::GetLoot()
 {
 	int intLoot;
-	intLoot = rand() % 0 + Loot.size();
+	intLoot = rand() % Loot.size();
 	Item tempItem = *Loot[intLoot];
-	return Item();
+	return tempItem;
 }
 
+int main() {
+	GameEngine newGame;
+	newGame.PlayGame();
+
+	system("pause");
+	return 0;
+}

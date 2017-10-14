@@ -20,6 +20,8 @@ public:
 	void displayItem(); // displays items in bag
 	void addItem(Item newItem); // adds new item
 	int getBagsize() { return bag.size(); }
+	void addMoney(int money);
+	int getMoney() { return intPrizeMoney; };
 
 
 protected:

@@ -188,26 +188,26 @@ bool Combat::itemMenu(Player thePlayer, int intPlayer){
 	return true;
 }
 
-int main() {
-	srand(time(NULL));
-	Player test("testname", 10, 10, 10,5);
-	Item testItem1("Fidget Spinner", 100, 50, 50, 50, true); //one time use item
-	Item testItem2("Health Potion", 100, 0, 0, 0, false); //permanent use item
-	test.addItem(testItem1);
-	test.addItem(testItem2);
-	//cout << test.characterAttack() << endl;
-	//cout << test.characterDefend() << endl;
-	Monster mob1("Testmob", 10, 10, 10);
-	Monster mob2("Testmob2", 100, 5, 5);
-	Monster mob3("Testmob3", 100, 5, 5, 3 );
-	//cout << mob1.characterAttack() << endl;
-	//cout << mob1.characterDefend() << endl;
-	vector<Player> plParty = { test };
-	vector<Monster> mbParty = { mob1,mob2 , mob3 };
-	Combat fight1(plParty, mbParty);
-	fight1.execute_Combat(plParty, mbParty);
-
-
-	system("pause");
-	return 0;
-}
+//int main() {
+//	srand(time(NULL));
+//	Player test("testname", 10, 10, 10,5);
+//	Item testItem1("Fidget Spinner", 100, 50, 50, 50, true); //one time use item
+//	Item testItem2("Health Potion", 100, 0, 0, 0, false); //permanent use item
+//	test.addItem(testItem1);
+//	test.addItem(testItem2);
+//	//cout << test.characterAttack() << endl;
+//	//cout << test.characterDefend() << endl;
+//	Monster mob1("Testmob", 10, 10, 10);
+//	Monster mob2("Testmob2", 100, 5, 5);
+//	Monster mob3("Testmob3", 100, 5, 5, 3 );
+//	//cout << mob1.characterAttack() << endl;
+//	//cout << mob1.characterDefend() << endl;
+//	vector<Player> plParty = { test };
+//	vector<Monster> mbParty = { mob1,mob2 , mob3 };
+//	Combat fight1(plParty, mbParty);
+//	fight1.execute_Combat(plParty, mbParty);
+//
+//
+//	system("pause");
+//	return 0;
+//}

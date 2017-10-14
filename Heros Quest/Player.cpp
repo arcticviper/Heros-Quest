@@ -142,4 +142,7 @@ void Player::addItem(Item newItem){
 	cout << "The new item: " << newItem.getName() << "has been added to your inventory." << endl;
 }
 
+void Player::addMoney(int money){
+	intPrizeMoney = intPrizeMoney + money;
+}
 
