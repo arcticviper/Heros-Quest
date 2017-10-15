@@ -22,6 +22,7 @@ public:
 	int getBagsize() { return bag.size(); }
 	void addMoney(int money);
 	int getMoney() { return intPrizeMoney; };
+	void takeDamage(int damage);
 
 
 protected:

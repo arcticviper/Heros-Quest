@@ -3,7 +3,7 @@
 #include "InputFunctions.h"
 using namespace std;
 
-Combat::Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter) {
+Combat::Combat(vector<Player> PlayableCharacter, vector<Monster> NonPlayableCharacter) {
 	playerParty = PlayableCharacter;
 	monsterParty = NonPlayableCharacter;
 }
@@ -18,36 +18,43 @@ void Combat::execute_Combat(std::vector<Player> PlayableCharacter, std::vector<M
 		monsterParty[i].resetSpecial();
 	}
 	while (playerParty.size() > 0 || monsterParty.size() > 0) {
-		//checks life of party
-
-		//if party is dead
-		if (playerParty.size() == 0) {
-			cout << "Your party is dead." << endl;
-			break;
-		}
-		//if monsters are dead
-		else if (monsterParty.size() == 0) {
-			cout << endl << "The enemies are dead." << endl;
-			break;
-		}
-		else {
-
-			//loops through playable character
-			cout << "It's now the players turn." << endl;
-			for (int i = 0; i < playerParty.size(); i++) {
+		cout << "It's now the players turn." << endl;
+		for (int i = 0; i < playerParty.size(); i++) {
+			//break out of for loop if monsters are dead
+			if (monsterParty.size() == 0) {
+				cout << endl << "The enemies are dead." << endl;
+				break;
+			}
+			else {
 				//cout << playerParty[i].getHealth() <<endl;
 				cout << i + 1 << ". " << playerParty[i].displayStats() << endl; //displays as: 1. Name: PlayerName HP:123 ATK:123 DEF:123 SPATK:123
-				playerCombat(playerParty[i],i); //runs combat options
+				playerCombat(playerParty[i], i); //runs combat options
 			}
-			//loops through mobs
-			cout << "It's now the monsters turn." << endl;
-			for (int i = 0; i < monsterParty.size(); i++) {
+			
+		}
+		//break out of while loop if monsters are dead
+		if (monsterParty.size() == 0) {
+			break;
+		}
+		//loops through mobs
+		cout << "It's now the monsters turn." << endl;
+		for (int i = 0; i < monsterParty.size(); i++) {
+			//break out of for loop if players are dead
+			if (playerParty.size() == 0) {
+				cout << "Your party is dead." << endl;
+				break;
+			}
+			else {
 				//cout << monsterParty[i].getHealth() << endl;
 				cout << i + 1 << ". " << monsterParty[i].displayStats();
-				monsterCombat(monsterParty[i],i);
+				monsterCombat(monsterParty[i], i);
 			}
-			cout << endl;
 		}
+		//break out of while loop if players are dead
+		if (playerParty.size() == 0) {
+			break;
+		}
+		cout << endl;
 	}
 }
 

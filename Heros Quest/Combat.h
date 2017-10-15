@@ -11,9 +11,9 @@ public:
 	Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter); // initiates combat sequence
 	//~Combat(); // returns state to original
 	//void combatSequence(Player playerAttacker, Monster mobDefender);
-	void execute_Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter);
-	std::vector<Player> getPlayerResult() { return playerParty; };
-	std::vector<Monster> getMonsterResult() { return monsterParty; };
+	void execute_Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter); // runs combat
+	std::vector<Player> getPlayerResult() { return playerParty; }; //returns playerparty
+	std::vector<Monster> getMonsterResult() { return monsterParty; }; //returns monsterparty
 
 protected:
 

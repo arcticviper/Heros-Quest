@@ -1,7 +1,5 @@
 ﻿  GameEngine.cpp
 c:\users\charles\source\repos\heros-quest\heros quest\player.h(22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-c:\users\charles\source\repos\heros-quest\heros quest\gameengine.cpp(15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\charles\source\repos\heros-quest\heros quest\gameengine.cpp(95): warning C4390: ';': empty controlled statement found; is this the intent?
-c:\users\charles\source\repos\heros-quest\heros quest\gameengine.cpp(94): warning C4724: potential mod by 0
+c:\users\charles\source\repos\heros-quest\heros quest\gameengine.cpp(16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Heros Quest.vcxproj -> C:\Users\Charles\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.exe
   Heros Quest.vcxproj -> C:\Users\Charles\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.pdb (Partial PDB)

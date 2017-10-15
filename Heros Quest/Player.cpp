@@ -139,10 +139,26 @@ void Player::displayItem(){
 
 void Player::addItem(Item newItem){
 	bag.push_back(newItem);
-	cout << "The new item: " << newItem.getName() << "has been added to your inventory." << endl;
+	cout << "The new item: " << newItem.getName() << " has been added to your inventory." << endl;
 }
 
 void Player::addMoney(int money){
 	intPrizeMoney = intPrizeMoney + money;
+}
+
+void Player::takeDamage(int damage)
+{
+	int intDefence = characterDefend();
+	if (damage > intDefence) {
+		damage = damage - intDefence;
+		cout << getName() << " has been hit for " << damage << " damage." << endl;
+		intHealth = intHealth - damage;
+		if (intHealth < 0) {
+			intHealth = 0;
+		}
+	}
+	else {
+		cout << "You missed!" << endl;
+	}
 }
 

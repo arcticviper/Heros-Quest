@@ -17,9 +17,9 @@ public:
 	int characterAttack(int intMin,int intMax); // runs attack with adjusted min/max values
 	int characterDefend(); // runs the 1-6+skill for defence
 	int characterDefend(int intMin, int intMax); // runs defence with adjusted min/max values
-	void takeDamage(int intDamage);
-	void resetSpecial();
-	std::string displayStats();
+	void takeDamage(int intDamage); // for receiving damage
+	void resetSpecial(); //resets special, runs at start of combat
+	std::string displayStats(); // displays name, hp, atk, def, spatk
 
 protected:
 	int intHealth; //health variable
