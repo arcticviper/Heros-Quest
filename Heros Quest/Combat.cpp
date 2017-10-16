@@ -4,7 +4,10 @@
 using namespace std;
 
 Combat::Combat(vector<Player> PlayableCharacter, vector<Monster> NonPlayableCharacter) {
-	playerParty = PlayableCharacter;
+	cout << "Combat constructor " << PlayableCharacter[0].getHealth() << endl;
+	for (int i = 0; i < PlayableCharacter.size(); i++) {
+		playerParty.push_back(PlayableCharacter[i]);
+	}
 	monsterParty = NonPlayableCharacter;
 }
 

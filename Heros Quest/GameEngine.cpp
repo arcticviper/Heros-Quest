@@ -69,7 +69,9 @@ void GameEngine::Basic(){
 		SinglePlayer.push_back(*Players[0]);
 		SingleMonster.push_back(*Monsters[0]);
 		//initialise combat
+		cout << SinglePlayer[0].getHealth();
 		Combat SingleFight(SinglePlayer, SingleMonster);
+		cout << SinglePlayer[0].getHealth();
 		//instance combat
 		SingleFight.execute_Combat(SinglePlayer, SingleMonster);
 		//checks if player has lost
