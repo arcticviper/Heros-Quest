@@ -2,7 +2,6 @@
 #include "InputFunctions.h"
 #include <iostream>
 #include <time.h>
-#include <sstream>
 using namespace std;
 
 GameEngine::GameEngine(){
@@ -33,22 +32,19 @@ void GameEngine::PlayGame(){
 	{
 	case 1:
 		Basic();
-		break;
 	case 2:
-		Easy();
-		break;
+		//Easy();
 	case 3:
 		//Normal();
-		break;
 	case 4:
 		//Hard();
-		break;
 	default:
 		break;
 	}
 }
 
 void GameEngine::Basic(){
+	
 	//populate enemies
 	Monsters.push_back(new Monster("Monster 1", 10, 1, 1, 0));
 	Monsters.push_back(new Monster("Monster 2", 20, 3, 2, 0));
@@ -59,13 +55,17 @@ void GameEngine::Basic(){
 	string PlayerName = makeStringChoice("What is your name?");
 	//Add player
 	Players.push_back(new Player(PlayerName, 20, 3, 3, 2));
-
 	//Give a random item to start with
+<<<<<<< HEAD
 	Players[0]->addItem(new Item (GetLoot()));
+=======
+	Players[0]->addItem(GetLoot());
+	//while both vectors are not empty
+>>>>>>> parent of 23824e3... 15/10 - Completed easy
 	vector<Player> SinglePlayer;
 	vector<Monster> SingleMonster;
 	while (Monsters.size() > 0 && Players.size() > 0){
-		//store instance players/monsters in temp vector
+		//store players/monsters in temp vector
 		SinglePlayer.push_back(*Players[0]);
 		SingleMonster.push_back(*Monsters[0]);
 		//initialise combat
@@ -74,26 +74,20 @@ void GameEngine::Basic(){
 		cout << SinglePlayer[0].getHealth();
 		//instance combat
 		SingleFight.execute_Combat(SinglePlayer, SingleMonster);
-		//checks if player has lost
-		if (SingleFight.getPlayerResult().size() == 0) {
-			cout << "You lose!" << endl;
-			cout << "Game over!" << endl;
-			cout << "Your final score was: " << SinglePlayer[0].getMoney() << endl;
-			break;
-		}
-		//return/overwrites the current state of player
+		//return the current state of player
 		SinglePlayer = SingleFight.getPlayerResult();
 		SingleMonster = SingleFight.getMonsterResult();
 		//check if player has won
-		if (SingleFight.getMonsterResult().size() == 0) {
+		if (SingleMonster.size() == 0) {
 			cout << "You won the battle!" << endl;
 			//get prize money
 			SinglePlayer[0].addMoney(SinglePlayer[0].getHealth());
 			//add 20 health
 			SinglePlayer[0].addStats(20, 0, 0, 0);
-			//removes monster from monsters vector
+			//removes monster
 			Monsters.erase(Monsters.begin());
 		}
+<<<<<<< HEAD
 		//give player skills to add
 		SinglePlayer[0] = allocateSkills(SinglePlayer[0]);
 		//give 50% chance of loot by rolling intLoopChance
@@ -159,39 +153,19 @@ void GameEngine::Easy(){
 		SingleFight.execute_Combat(PlayerTeam, SingleMonster);
 		//checks if player has lost
 		if (SingleFight.getPlayerResult().size() == 0) {
+=======
+
+		else if (SinglePlayer.size() == 0) {
+>>>>>>> parent of 23824e3... 15/10 - Completed easy
 			cout << "You lose!" << endl;
 			cout << "Game over!" << endl;
-			int totalScore = 0;
-			for (int i = 0; i < PlayerTeam.size(); i++) {
-				totalScore = totalScore + PlayerTeam[i].getMoney();
-			}
-			cout << "Your final score was: " << totalScore << endl;
-			Players.erase(Players.begin());
 			break;
 		}
-		//return/overwrites the current state of player
-		PlayerTeam = SingleFight.getPlayerResult();
-		SingleMonster = SingleFight.getMonsterResult();
-		//check if player has won
-		if (SingleFight.getMonsterResult().size() == 0) {
-			cout << "You won the battle!" << endl;
-			//get prize money for all players
-			for (int i = 0; i < PlayerTeam.size(); i++) {
-				PlayerTeam[i].addMoney(PlayerTeam[i].getHealth());
-			}
-			//add 20 health
-			for (int i = 0; i < PlayerTeam.size(); i++) {
-				PlayerTeam[0].addStats(20, 0, 0, 0);
-			}
-			//removes monster from monsters vector
-			Monsters.erase(Monsters.begin());
-		}
 		//give player skills to add
-		for (int i = 0; i < PlayerTeam.size(); i++) {
-			PlayerTeam[i] = allocateSkills(PlayerTeam[i]);
-		}
-		//give 50% chance of loot by rolling intLoopChance
+
+		//give 50% chance of loot
 		int intLootChance;
+<<<<<<< HEAD
 		for (int i = 0; i < PlayerTeam.size(); i++) {
 			intLootChance = rand() % +101;
 			if (intLootChance > 75) {
@@ -212,12 +186,14 @@ void GameEngine::Easy(){
 		int totalScore = 0;
 		for (int i = 0; i < Players.size(); i++) {
 			totalScore = totalScore + Players[i]->getMoney();
+=======
+		intLootChance = rand() % 0 + 101;
+		if (intLootChance > 50); {
+			Players[0]->addItem(GetLoot());
+>>>>>>> parent of 23824e3... 15/10 - Completed easy
 		}
-		//add 50 points for winning
-		totalScore = totalScore + 50;
-		cout << "Your final score was: " << totalScore << endl;
 	}
-
+	
 
 
 }
@@ -260,47 +236,6 @@ Item GameEngine::GetLoot()
 	intLoot = rand() % Loot.size();
 	Item tempItem = *Loot[intLoot];
 	return tempItem;
-}
-
-Player GameEngine::allocateSkills(Player tempPlayer)
-{
-	int intSkills;
-	int skillChoice;
-	//randomise the chance for skills up to 7
-	intSkills = rand() % + 7;
-	cout << "You have received " << intSkills << " skill points." << endl;
-	//if skills received is greater than 0
-	while (intSkills > 0)
-	{
-		cout << "You have: " << intSkills << " points remaining." << endl;
-		//display menu
-		cout << "1. Attack: \t\t Currently:" << tempPlayer.getAttack() << endl;
-		cout << "2. Defence:\t\t Currently:" << tempPlayer.getDefence() << endl;
-		cout << "3. SpecialAttack: \t Currently:" << tempPlayer.getSpecialAttack() << endl;
-		skillChoice = makeIntChoice("Which skill would you like to allocate your points to? (Max is 10)", 1, 3);
-		switch (skillChoice){
-		case 1:
-			tempPlayer.addStats(0, 1, 0, 0);
-			intSkills--;
-			break;
-		case 2:
-			tempPlayer.addStats(0, 0, 1, 0);
-			intSkills--;
-			break;
-		case 3:
-			tempPlayer.addStats(0, 0, 0, 1);
-			intSkills--;
-			break;
-		default:
-			break;
-		}
-		//break out of while loop if all stats are maxed
-		if (tempPlayer.getAttack() == 10 && tempPlayer.getDefence() == 10 && tempPlayer.getSpecialAttack() == 10)
-		{
-			break;
-		}
-	}
-	return tempPlayer;
 }
 
 int main() {

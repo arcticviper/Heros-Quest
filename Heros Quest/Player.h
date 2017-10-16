@@ -21,8 +21,12 @@ public:
 	void addItem(Item* newItem); // adds new item
 	int getBagsize() { return bag.size(); }
 	void addMoney(int money);
+<<<<<<< HEAD
 	int getMoney() { return *intPrizeMoney; };
 	void takeDamage(int damage);
+=======
+	int getMoney() { return intPrizeMoney; };
+>>>>>>> parent of 23824e3... 15/10 - Completed easy
 
 
 protected:
