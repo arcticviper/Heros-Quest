@@ -61,7 +61,7 @@ void GameEngine::Basic(){
 	Players.push_back(new Player(PlayerName, 20, 3, 3, 2));
 
 	//Give a random item to start with
-	Players[0]->addItem(GetLoot());
+	Players[0]->addItem(new Item (GetLoot()));
 	vector<Player> SinglePlayer;
 	vector<Monster> SingleMonster;
 	while (Monsters.size() > 0 && Players.size() > 0){
@@ -98,7 +98,7 @@ void GameEngine::Basic(){
 		int intLootChance;
 		intLootChance = rand() % + 101;
 		if (intLootChance > 50) {
-			SinglePlayer[0].addItem(GetLoot());
+			SinglePlayer[0].addItem(new Item(GetLoot()));
 		}
 		//save the players state;
 		*Players[0] = SinglePlayer[0];
@@ -141,7 +141,7 @@ void GameEngine::Easy(){
 
 	//Give a random item to start with
 	for (int i = 0; i < Players.size(); i++) {
-		Players[0]->addItem(GetLoot());
+		Players[0]->addItem(new Item(GetLoot()));
 	}
 	vector<Player> PlayerTeam;
 	vector<Monster> SingleMonster;
@@ -193,7 +193,7 @@ void GameEngine::Easy(){
 		for (int i = 0; i < PlayerTeam.size(); i++) {
 			intLootChance = rand() % +101;
 			if (intLootChance > 75) {
-				PlayerTeam[0].addItem(GetLoot());
+				PlayerTeam[0].addItem(new Item(GetLoot()));
 			}
 		}
 		//save the players state;

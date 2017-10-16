@@ -7,6 +7,7 @@ class Item {
 public:
 	Item(); // default constructor
 	Item(std::string itemName, int HPEffect, int ATKEffect, int DEFEffect, int SPATKEffect, bool TEMPEffect); //constructor that takes full input
+	//~Item(); // default destructor
 	std::string getName() { return itemName; } //returns name of item
 	std::string getDetails(); //gets all details of item that aren't 0
 	std::string getDetailsShort(); //gets all details of item that aren't 0 ignoring name

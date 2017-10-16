@@ -3,20 +3,22 @@
 using namespace std;
 
 Player::Player () : Character(){
-	intPrizeMoney = 0;
-	intSpecialAttack = 0;
-	boolUsedSpecialAttack = false;
+	intPrizeMoney = new int(0);
+	intSpecialAttack = new int(0);
+	boolUsedSpecialAttack = new bool(false);
+	boolUsedDodge = new bool(false);
 }
 
 Player::Player(std::string name, int health, int attack, int defence, int specialAttack) : Character(name, health, attack, defence){
-	intPrizeMoney = 0;
-	intSpecialAttack = specialAttack;
-	boolUsedSpecialAttack = false;
+	intPrizeMoney = new int(0);
+	intSpecialAttack = new int (specialAttack);
+	boolUsedSpecialAttack = new bool (false);
+	boolUsedDodge = new bool(false);
 }
 
 int Player::specialAttack(){
-	boolUsedSpecialAttack = true;
-	return (Player::characterAttack() + intSpecialAttack);
+	*boolUsedSpecialAttack = true;
+	return (Player::characterAttack() + *intSpecialAttack);
 }
 
 void Player::addStats(int health, int attack, int defence, int specialAttack){
@@ -26,19 +28,19 @@ void Player::addStats(int health, int attack, int defence, int specialAttack){
 	int intDefenceCap;
 	int intSpecialAttackCap;
 	//calculates the changes can caps them if above a certain value.
-	intHealthCap = intHealth + health;
+	intHealthCap = *intHealth + health;
 	if (intHealthCap > 50) {
 		intHealthCap = 50;
 	}
-	intAttackCap = intAttack + attack;
+	intAttackCap = *intAttack + attack;
 	if (intAttackCap > 10) {
 		intAttackCap = 10;
 	}
-	intDefenceCap = intDefence + defence;
+	intDefenceCap = *intDefence + defence;
 	if (intDefenceCap > 10) {
 		intDefenceCap = 10;
 	}
-	intSpecialAttackCap = intSpecialAttack + specialAttack;
+	intSpecialAttackCap = *intSpecialAttack + specialAttack;
 	if (intSpecialAttackCap > 10) {
 		intSpecialAttackCap = 10;
 	}
@@ -80,19 +82,23 @@ void Player::replaceStats(int health, int attack, int defence, int specialAttack
 }
 
 void Player::replaceStatsNoCap(int health, int attack, int defence, int specialAttack){
-	intHealth = health;
-	intAttack = attack;
-	intDefence = defence;
-	intSpecialAttack = specialAttack;
+	delete intHealth;
+	delete intAttack;
+	delete intDefence;
+	delete intSpecialAttack;
+	intHealth = new int (health);
+	intAttack = new int (attack);
+	intDefence = new int (defence);
+	intSpecialAttack = new int (specialAttack);
 }
 
 //buffs defence by 1-6 by adding it onto of stats
 int Player::playerDodge(){
 	int dodgeBuff;
 	dodgeBuff = rand() % 6 + 1;
-	boolUsedDodge = true;
+	*boolUsedDodge = true;
 	addBuffs(0, 0, dodgeBuff, 0);
-	return Player::intDefence + dodgeBuff;
+	return *intDefence + dodgeBuff;
 }
 
 void Player::addBuffs(int intHPBuff, int intATKBuff, int intDEFBuff, int intSPATKBuff){
@@ -104,7 +110,7 @@ void Player::addBuffs(int intHPBuff, int intATKBuff, int intDEFBuff, int intSPAT
 void Player::resetBuffs(){
 	// calls stats stored in saved stats if there are any saved for the player
 	if (stats.size() != 0) {
-		replaceStats(stats[0], stats[1], stats[2], stats[3]);
+		replaceStats(*stats[0], *stats[1], *stats[2], *stats[3]);
 	}
 	//resets temporary stored stats vector to nothing
 	stats.clear();
@@ -112,12 +118,12 @@ void Player::resetBuffs(){
 
 void Player::useItem(int elementNumber){
 	//prints out itemname
-	cout << "You have chosen " << bag[elementNumber].getDetails() << endl;
+	cout << "You have chosen " << bag[elementNumber]->getDetails() << endl;
 	//stores stats in element
 	vector<int> tempStats;
-	tempStats = bag[elementNumber].getStats();
+	tempStats = bag[elementNumber]->getStats();
 	//if the item is temporary then buff temporarily
-	if (bag[elementNumber].getTemp() == true) {
+	if (bag[elementNumber]->getTemp() == true) {
 		addBuffs(tempStats[0], tempStats[1], tempStats[2], tempStats[3]);
 	}
 	//else add stats
@@ -132,14 +138,14 @@ void Player::useItem(int elementNumber){
 void Player::displayItem(){
 	cout << "Displaying items: " << endl;
 	for (int i = 0; i < bag.size(); i++) {
-		cout << i+1 << ". " <<  bag[i].getDetails();
+		cout << i+1 << ". " <<  bag[i]->getDetails();
 	}
 	cout << endl;
 }
 
-void Player::addItem(Item newItem){
+void Player::addItem(Item* newItem){
 	bag.push_back(newItem);
-	cout << "The new item: " << newItem.getName() << " has been added to your inventory." << endl;
+	cout << "The new item: " << newItem->getName() << " has been added to your inventory." << endl;
 }
 
 void Player::addMoney(int money){
