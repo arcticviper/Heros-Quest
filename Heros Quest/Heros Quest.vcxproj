@@ -22,7 +22,6 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="GameEngine.h" />
-    <ClInclude Include="InputFunctions.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
@@ -31,8 +30,6 @@
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Combat.cpp" />
-    <ClCompile Include="GameEngine.cpp" />
-    <ClCompile Include="InputFunctions.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />

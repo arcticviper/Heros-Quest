@@ -7,21 +7,13 @@ Monster::Monster() : Character(){
 	intSpecialAttack = 0;
 }
 
-<<<<<<< HEAD
 Monster::Monster(string name, int health, int attack, int defence) : Character(name,health,attack,defence)
-=======
-Monster::Monster(std::string name, int health, int attack, int defence) : Character(name,health,attack,defence)
->>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 {
 	//intPrizeMoney = prizeMoney;
 	intSpecialAttack = 0;
 }
 
-<<<<<<< HEAD
 Monster::Monster(string name, int health, int attack, int defence, int specialAttack) : Character(name, health, attack, defence)
-=======
-Monster::Monster(std::string name, int health, int attack, int defence, int specialAttack) : Character(name, health, attack, defence)
->>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 {
 	//intPrizeMoney = prizeMoney;
 	intSpecialAttack = specialAttack;

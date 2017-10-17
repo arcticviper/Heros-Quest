@@ -18,35 +18,19 @@ public:
 	void resetBuffs(); // resets all the buffs implemented
 	void useItem(int elementNumber); // use item by picking element number
 	void displayItem(); // displays items in bag
-	void addItem(Item* newItem); // adds new item
+	void addItem(Item newItem); // adds new item
 	int getBagsize() { return bag.size(); }
 	void addMoney(int money);
-<<<<<<< HEAD
 	int getMoney() { return intPrizeMoney; };
 	void takeDamage(int damage);
-=======
-<<<<<<< HEAD
-	int getMoney() { return *intPrizeMoney; };
-	void takeDamage(int damage);
-=======
-	int getMoney() { return intPrizeMoney; };
->>>>>>> parent of 23824e3... 15/10 - Completed easy
->>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 
 
 protected:
 	void addBuffs(int intHPBuff, int intATKBuff, int intDEFBuff, int intSPATKBuff);
-<<<<<<< HEAD
 	int intPrizeMoney; //prize money recieved
 	bool boolUsedDodge; //used dodge
 	std::vector<Item> bag; // bag for items
 	std::vector<int> stats ; // buffs that are utilised for a single turn
-=======
-	int *intPrizeMoney; //prize money recieved
-	bool *boolUsedDodge; //used dodge
-	std::vector<Item*> bag; // bag for items
-	std::vector<int*> stats ; // buffs that are utilised for a single turn
->>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 
 private:
 

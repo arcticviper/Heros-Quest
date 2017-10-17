@@ -3,20 +3,8 @@
 #include "InputFunctions.h"
 using namespace std;
 
-<<<<<<< HEAD
 Combat::Combat(vector<Player> PlayableCharacter, vector<Monster> NonPlayableCharacter) {
-=======
-<<<<<<< HEAD
-Combat::Combat(vector<Player> PlayableCharacter, vector<Monster> NonPlayableCharacter) {
-	cout << "Combat constructor " << PlayableCharacter[0].getHealth() << endl;
-	for (int i = 0; i < PlayableCharacter.size(); i++) {
-		playerParty.push_back(PlayableCharacter[i]);
-	}
-=======
-Combat::Combat(std::vector<Player> PlayableCharacter, std::vector<Monster> NonPlayableCharacter) {
->>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	playerParty = PlayableCharacter;
->>>>>>> parent of 23824e3... 15/10 - Completed easy
 	monsterParty = NonPlayableCharacter;
 }
 
@@ -48,7 +36,6 @@ void Combat::execute_Combat(vector<Player> PlayableCharacter, vector<Monster> No
 		if (monsterParty.size() == 0) {
 			break;
 		}
-<<<<<<< HEAD
 		//loops through mobs
 		cout << "It's now the monsters turn." << endl;
 		for (int i = 0; i < monsterParty.size(); i++) {
@@ -61,25 +48,7 @@ void Combat::execute_Combat(vector<Player> PlayableCharacter, vector<Monster> No
 				//cout << monsterParty[i].getHealth() << endl;
 				cout << i + 1 << ". " << monsterParty[i].displayStats();
 				monsterCombat(monsterParty[i], i);
-=======
-		else {
-
-			//loops through playable character
-			cout << "It's now the players turn." << endl;
-			for (int i = 0; i < playerParty.size(); i++) {
-				//cout << playerParty[i].getHealth() <<endl;
-				cout << i + 1 << ". " << playerParty[i].displayStats() << endl; //displays as: 1. Name: PlayerName HP:123 ATK:123 DEF:123 SPATK:123
-				playerCombat(playerParty[i],i); //runs combat options
 			}
-			//loops through mobs
-			cout << "It's now the monsters turn." << endl;
-			for (int i = 0; i < monsterParty.size(); i++) {
-				//cout << monsterParty[i].getHealth() << endl;
-				cout << i + 1 << ". " << monsterParty[i].displayStats();
-				monsterCombat(monsterParty[i],i);
->>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
-			}
-			cout << endl;
 		}
 		//break out of while loop if players are dead
 		if (playerParty.size() == 0) {
