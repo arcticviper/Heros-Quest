@@ -2,23 +2,34 @@
 #include "InputFunctions.h"
 #include <iostream>
 #include <time.h>
+<<<<<<< HEAD
 #include <sstream>
+=======
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 using namespace std;
 
 GameEngine::GameEngine(){
 	//initalise empty vectors for storing players/monsters
 	Players = {};
 	Monsters = {};
+<<<<<<< HEAD
 	//populate items, may change in future
 	Loot = {};
 	FillLoot();
 	//vector<Item*> tempLoot = FillLoot();
 	//populate monster names
 	FillNames();
+=======
+	//Loot = {};
+	//populate items, may change in future
+	vector<Item*> tempLoot = FillLoot();
+	Loot.insert(Loot.begin(), tempLoot.begin(), tempLoot.end());
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	srand(time(NULL)); //initialises random items
 
 }
 
+<<<<<<< HEAD
 GameEngine::~GameEngine()
 {
 	for (int i = 0; i < Players.size(); i++) {
@@ -33,22 +44,32 @@ GameEngine::~GameEngine()
 
 }
 
+=======
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 void GameEngine::PlayGame(){
 	int modes;
 	cout << "Welcome to Hero's Quest!" << endl;
 	cout << "There are 4 Different modes:" << endl;
 	//display menu
 	cout << endl;
+<<<<<<< HEAD
 	cout << "1. Basic Mode - 1 on 1 combat with standard drop rates. Fixed monster stats" << endl; // 50% item loot
 	cout << "2. Easy Mode - 4 on 1 combat with increased drop rates. Fixed monster stats" << endl; // 75% item loot
 	cout << "3. Normal Mode - 4 on 4 combat with standard drop rates. Random monster stats" << endl; // 50% item loot
 	cout << "4. Hard Mode - 1 on 4 combat with lowered drop rates. Random monster stats" << endl; // 25% item loot
+=======
+	cout << "1. Basic Mode - 1 on 1 combat with standard drop rates." << endl; // 50% item loot
+	cout << "2. Easy Mode - 4 on 1 combat with increased drop rates." << endl; // 75% item loot
+	cout << "3. Normal Mode - 4 on 4 combat with standard drop rates." << endl; // 50% item loot
+	cout << "4. Hard Mode - 1 on 4 combat with lowered drop rates." << endl; // 25% item loot
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	//cout << "5. Custom Modes - Unique Challenges" << endl; //1 defence challenge, ect
 	modes = makeIntChoice("Which mode would you like to select?", 1, 4);
 	switch (modes)
 	{
 	case 1:
 		Basic();
+<<<<<<< HEAD
 		break;
 	case 2:
 		Easy();
@@ -59,22 +80,41 @@ void GameEngine::PlayGame(){
 	case 4:
 		Hard();
 		break;
+=======
+	case 2:
+		//Easy();
+	case 3:
+		//Normal();
+	case 4:
+		//Hard();
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	default:
 		break;
 	}
 }
 
 void GameEngine::Basic(){
+<<<<<<< HEAD
 	//populate enemies
 	Monsters.push_back(new Monster(getMonsterName(0), 10, 1, 1, 0));
 	Monsters.push_back(new Monster(getMonsterName(1), 20, 3, 2, 0));
 	Monsters.push_back(new Monster(getMonsterName(2), 30, 5, 4, 0));
 	Monsters.push_back(new Monster(getMonsterName(3), 40, 6, 7, 0));
 	Monsters.push_back(new Monster(getMonsterName(4), 50, 8, 8, 5));
+=======
+	
+	//populate enemies
+	Monsters.push_back(new Monster("Monster 1", 10, 1, 1, 0));
+	Monsters.push_back(new Monster("Monster 2", 20, 3, 2, 0));
+	Monsters.push_back(new Monster("Monster 3", 30, 5, 4, 0));
+	Monsters.push_back(new Monster("Monster 4", 40, 6, 7, 0));
+	Monsters.push_back(new Monster("Monster 5", 50, 8, 8, 5));
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	//get player name
 	string PlayerName = makeStringChoice("What is your name?");
 	//Add player
 	Players.push_back(new Player(PlayerName, 20, 3, 3, 2));
+<<<<<<< HEAD
 
 	//Give a random item to start with
 	Players[0]->addItem(GetLoot());
@@ -101,23 +141,62 @@ void GameEngine::Basic(){
 		SingleMonster = SingleFight.getMonsterResult();
 		//check if player has won
 		if (SingleFight.getMonsterResult().size() == 0) {
+=======
+	//Give a random item to start with
+<<<<<<< HEAD
+	Players[0]->addItem(new Item (GetLoot()));
+=======
+	Players[0]->addItem(GetLoot());
+	//while both vectors are not empty
+>>>>>>> parent of 23824e3... 15/10 - Completed easy
+	vector<Player> SinglePlayer;
+	vector<Monster> SingleMonster;
+	while (Monsters.size() > 0 && Players.size() > 0){
+		//store players/monsters in temp vector
+		SinglePlayer.push_back(*Players[0]);
+		SingleMonster.push_back(*Monsters[0]);
+		//initialise combat
+		cout << SinglePlayer[0].getHealth();
+		Combat SingleFight(SinglePlayer, SingleMonster);
+		cout << SinglePlayer[0].getHealth();
+		//instance combat
+		SingleFight.execute_Combat(SinglePlayer, SingleMonster);
+		//return the current state of player
+		SinglePlayer = SingleFight.getPlayerResult();
+		SingleMonster = SingleFight.getMonsterResult();
+		//check if player has won
+		if (SingleMonster.size() == 0) {
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 			cout << "You won the battle!" << endl;
 			//get prize money
 			SinglePlayer[0].addMoney(SinglePlayer[0].getHealth());
 			//add 20 health
 			SinglePlayer[0].addStats(20, 0, 0, 0);
+<<<<<<< HEAD
 			//delete pointer location
 			delete Monsters[0];
 			//removes monster from monsters vector
 			Monsters.clear();
 		}
+=======
+			//removes monster
+			Monsters.erase(Monsters.begin());
+		}
+<<<<<<< HEAD
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 		//give player skills to add
 		SinglePlayer[0] = allocateSkills(SinglePlayer[0]);
 		//give 50% chance of loot by rolling intLoopChance
 		int intLootChance;
+<<<<<<< HEAD
 		intLootChance = getRandom(0, 100);
 		if (intLootChance > 50) {
 			SinglePlayer[0].addItem(GetLoot());
+=======
+		intLootChance = rand() % + 101;
+		if (intLootChance > 50) {
+			SinglePlayer[0].addItem(new Item(GetLoot()));
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 		}
 		//save the players state;
 		*Players[0] = SinglePlayer[0];
@@ -143,11 +222,19 @@ void GameEngine::Basic(){
 
 void GameEngine::Easy(){
 	//populate enemies
+<<<<<<< HEAD
 	Monsters.push_back(new Monster(getMonsterName(0), 10, 1, 1, 0));
 	Monsters.push_back(new Monster(getMonsterName(1), 20, 3, 2, 0));
 	Monsters.push_back(new Monster(getMonsterName(2), 30, 5, 4, 0));
 	Monsters.push_back(new Monster(getMonsterName(3), 40, 6, 7, 0));
 	Monsters.push_back(new Monster(getMonsterName(4), 50, 8, 8, 5));
+=======
+	Monsters.push_back(new Monster("Monster 1", 10, 1, 1, 0));
+	Monsters.push_back(new Monster("Monster 2", 20, 3, 2, 0));
+	Monsters.push_back(new Monster("Monster 3", 30, 5, 4, 0));
+	Monsters.push_back(new Monster("Monster 4", 40, 6, 7, 0));
+	Monsters.push_back(new Monster("Monster 5", 50, 8, 8, 5));
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	//get player name/add 4 players
 	stringstream sstream;
 	for (int i = 0; i < 4; i++) {
@@ -160,7 +247,11 @@ void GameEngine::Easy(){
 
 	//Give a random item to start with
 	for (int i = 0; i < Players.size(); i++) {
+<<<<<<< HEAD
 		Players[i]->addItem(GetLoot());
+=======
+		Players[0]->addItem(new Item(GetLoot()));
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	}
 	vector<Player> PlayerTeam;
 	vector<Monster> SingleMonster;
@@ -176,6 +267,7 @@ void GameEngine::Easy(){
 		SingleFight.execute_Combat(PlayerTeam, SingleMonster);
 		//checks if player has lost
 		if (SingleFight.getPlayerResult().size() == 0) {
+<<<<<<< HEAD
 			cout << "You lose!" << endl;
 			cout << "Game over!" << endl;
 			int totalScore = 0;
@@ -452,6 +544,25 @@ void GameEngine::Hard()
 			intLootChance = getRandom(0, 100);
 			if (intLootChance > 75) {
 				PlayerTeam[0].addItem(GetLoot());
+=======
+=======
+
+		else if (SinglePlayer.size() == 0) {
+>>>>>>> parent of 23824e3... 15/10 - Completed easy
+			cout << "You lose!" << endl;
+			cout << "Game over!" << endl;
+			break;
+		}
+		//give player skills to add
+
+		//give 50% chance of loot
+		int intLootChance;
+<<<<<<< HEAD
+		for (int i = 0; i < PlayerTeam.size(); i++) {
+			intLootChance = rand() % +101;
+			if (intLootChance > 75) {
+				PlayerTeam[0].addItem(new Item(GetLoot()));
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 			}
 		}
 		//save the players state;
@@ -459,7 +570,12 @@ void GameEngine::Hard()
 			*Players[i] = PlayerTeam[i];
 		}
 		//clear vectors
+<<<<<<< HEAD
 		PlayerTeam.clear();
+=======
+		PlayerTeam.erase(PlayerTeam.begin());
+		//SingleMonster.erase(SingleMonster.begin());
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	}
 	if (Players.size() > 0) {
 		cout << "Congratulations!" << endl;
@@ -467,6 +583,7 @@ void GameEngine::Hard()
 		int totalScore = 0;
 		for (int i = 0; i < Players.size(); i++) {
 			totalScore = totalScore + Players[i]->getMoney();
+<<<<<<< HEAD
 		}
 		//add 70 points for winning
 		totalScore = totalScore + 70;
@@ -476,6 +593,23 @@ void GameEngine::Hard()
 
 void GameEngine::FillLoot(){
 	vector<Item*> Items; // all Items
+=======
+=======
+		intLootChance = rand() % 0 + 101;
+		if (intLootChance > 50); {
+			Players[0]->addItem(GetLoot());
+>>>>>>> parent of 23824e3... 15/10 - Completed easy
+		}
+	}
+	
+
+
+}
+
+vector<Item*> GameEngine::FillLoot(){
+	vector<Item*> Items; // all Items
+
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 	vector<Item*> Potions; // potions
 	//health potions
 	Potions.push_back(new Item("Red Potion", 5, 0, 0, 0, true));
@@ -498,6 +632,7 @@ void GameEngine::FillLoot(){
 	Weapons.push_back(new Item("Butterfly Net", 0, 1, 0, 0, false));
 	Weapons.push_back(new Item("Staff of Netherwind", 0, 2, 0, 0, false));
 	Weapons.push_back(new Item("Bow of Darkwood", 0, 3, 0, 0, false));
+<<<<<<< HEAD
 	//insert all items into loot
 	Items.insert(Items.end(), Potions.begin(), Potions.end());
 	Items.insert(Items.end(), Armour.begin(), Armour.end());
@@ -545,6 +680,13 @@ int GameEngine::getRandom(int min, int minplus)
 string GameEngine::getMonsterName(int mobLevel)
 {
 	return Name[mobLevel][rand() % Name[mobLevel].size()];
+=======
+
+	Items.insert(Items.end(), Potions.begin(), Potions.end());
+	Items.insert(Items.end(), Armour.begin(), Armour.end());
+	Items.insert(Items.end(), Weapons.begin(), Weapons.end());
+	return Items;
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 }
 
 Item GameEngine::GetLoot()
@@ -555,6 +697,7 @@ Item GameEngine::GetLoot()
 	return tempItem;
 }
 
+<<<<<<< HEAD
 Player GameEngine::allocateSkills(Player tempPlayer)
 {
 	int intSkills;
@@ -596,6 +739,8 @@ Player GameEngine::allocateSkills(Player tempPlayer)
 	return tempPlayer;
 }
 
+=======
+>>>>>>> 8747f571685280f2a5599efe7e3336b41edd54bd
 int main() {
 	GameEngine newGame;
 	newGame.PlayGame();
