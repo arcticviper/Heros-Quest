@@ -199,7 +199,7 @@ void GameEngine::Easy(){
 			}
 			//add 20 health
 			for (int i = 0; i < PlayerTeam.size(); i++) {
-				PlayerTeam[0].addStats(20, 0, 0, 0);
+				PlayerTeam[i].addStats(20, 0, 0, 0);
 			}
 			//delete pointer location
 			delete Monsters[0];
@@ -573,16 +573,43 @@ Player GameEngine::allocateSkills(Player tempPlayer)
 		skillChoice = makeIntChoice("Which skill would you like to allocate your points to? (Max is 10)", 1, 3);
 		switch (skillChoice){
 		case 1:
-			tempPlayer.addStats(0, 1, 0, 0);
-			intSkills--;
+			if (tempPlayer.getAttack() == 10) {
+				cout << "You already have max attack stats." << endl;
+			}
+			else {
+				tempPlayer.addStats(0, 1, 0, 0);
+				cout << "Your attack stat is now:"<< tempPlayer.getAttack() << endl;
+				if (tempPlayer.getAttack() == 10) {
+					cout << "You have now maxed your defence stats." << endl;
+				}
+				intSkills--;
+			}
 			break;
 		case 2:
-			tempPlayer.addStats(0, 0, 1, 0);
-			intSkills--;
+			if (tempPlayer.getDefence() == 10) {
+				cout << "You already have max defence stats." << endl;
+			}
+			else {
+				tempPlayer.addStats(0, 0, 1, 0);
+				cout << "Your defence stat is now:" << tempPlayer.getDefence() << endl;
+				if (tempPlayer.getDefence() == 10) {
+					cout << "You have now maxed your defence stats." << endl;
+				}
+				intSkills--;
+			}
 			break;
 		case 3:
-			tempPlayer.addStats(0, 0, 0, 1);
-			intSkills--;
+			if (tempPlayer.getSpecialAttack() == 10) {
+				cout << "You already have max special attack stats." << endl;
+			}
+			else {
+				tempPlayer.addStats(0, 0, 0, 1);
+				cout << "Your special attack stat is now:" << tempPlayer.getSpecialAttack() << endl;
+				if (tempPlayer.getSpecialAttack() == 10) {
+					cout << "You have now maxed your special attack stats." << endl;
+				}
+				intSkills--;
+			}
 			break;
 		default:
 			break;
@@ -590,6 +617,7 @@ Player GameEngine::allocateSkills(Player tempPlayer)
 		//break out of while loop if all stats are maxed
 		if (tempPlayer.getAttack() == 10 && tempPlayer.getDefence() == 10 && tempPlayer.getSpecialAttack() == 10)
 		{
+			cout << "You have maxed all your stats!" << endl;
 			break;
 		}
 	}

@@ -17,6 +17,7 @@ void Combat::execute_Combat(vector<Player> PlayableCharacter, vector<Monster> No
 	for (int i = 0; i < monsterParty.size(); i++) {
 		monsterParty[i].resetSpecial();
 	}
+	//while both parties are not dead
 	while (playerParty.size() > 0 || monsterParty.size() > 0) {
 		cout << "It's now the players turn." << endl;
 		for (int i = 0; i < playerParty.size(); i++) {
@@ -27,7 +28,15 @@ void Combat::execute_Combat(vector<Player> PlayableCharacter, vector<Monster> No
 			}
 			else {
 				//cout << playerParty[i].getHealth() <<endl;
-				cout << i + 1 << ". " << playerParty[i].displayStats() << endl; //displays as: 1. Name: PlayerName HP:123 ATK:123 DEF:123 SPATK:123
+				//displays all players and highlights current player
+				for (int j = 0; j < playerParty.size(); j++) {
+					if (j == i) {
+						cout <<">>>>" << "\t" << j + 1 << ". " << playerParty[j].displayStats() << endl; //displays as: >>>> 1. Name: PlayerName HP:123 ATK:123 DEF:123 SPATK:123
+					}
+					else {
+						cout << "\t" << j + 1 << ". " << playerParty[j].displayStats() << endl; //displays as:		 1. Name: PlayerName HP:123 ATK:123 DEF:123 SPATK:123
+					}
+				}
 				playerCombat(playerParty[i], i); //runs combat options
 			}
 			
