@@ -109,7 +109,7 @@ void Combat::playerCombat(Player thePlayer, int intPlayer){
 		cout << "3. Special attack (Heavy Attack + Sp.Attack)" << endl; //special attack, can only be used once per combat
 		cout << "4. Dodge (Buff Defence by 1-6, 0 dmg)" << endl; //buffs defence by 1-6 points for single round but deals no damage
 		cout << "5. Item" << endl; //Opens item inventory, if item is used, sacrifice turn
-		cout << "6. Save (saves current level+stats)" << endl; //Saves current game, not current state
+		//cout << "6. Save (saves current level+stats)" << endl; //Saves current game, not current state
 		//option for input
 		intPlayerOption = makeIntChoice("What would you like to select?", 1, 6);
 		cout << endl;
@@ -153,6 +153,7 @@ void Combat::playerCombat(Player thePlayer, int intPlayer){
 				break;
 			}
 		case 6:
+			//to implement
 			//save
 			break;
 		}

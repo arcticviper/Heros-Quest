@@ -116,7 +116,7 @@ void GameEngine::Basic(){
 		//give 50% chance of loot by rolling intLoopChance
 		int intLootChance;
 		intLootChance = getRandom(0, 100);
-		if (intLootChance > 50) {
+		if (intLootChance < 50) {
 			SinglePlayer[0].addItem(GetLoot());
 		}
 		//save the players state;
@@ -214,7 +214,7 @@ void GameEngine::Easy(){
 		int intLootChance;
 		for (int i = 0; i < PlayerTeam.size(); i++) {
 			intLootChance = getRandom(0, 100);
-			if (intLootChance > 25) {
+			if (intLootChance < 75) {
 				PlayerTeam[0].addItem(GetLoot());
 			}
 		}
@@ -450,8 +450,8 @@ void GameEngine::Hard()
 		int intLootChance;
 		for (int i = 0; i < PlayerTeam.size(); i++) {
 			intLootChance = getRandom(0, 100);
-			if (intLootChance > 75) {
-				PlayerTeam[0].addItem(GetLoot());
+			if (intLootChance < 25) {
+				PlayerTeam[i].addItem(GetLoot());
 			}
 		}
 		//save the players state;

@@ -1,5 +1,16 @@
-﻿  Combat.cpp
-c:\users\charles\source\repos\heros-quest\heros quest\player.h(22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-c:\users\charles\source\repos\heros-quest\heros quest\combat.cpp(95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  Heros Quest.vcxproj -> C:\Users\Charles\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.exe
-  Heros Quest.vcxproj -> C:\Users\Charles\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.pdb (Partial PDB)
+﻿  Player.cpp
+c:\users\cden0003\source\repos\heros-quest\heros quest\player.h(22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Monster.cpp
+  Item.cpp
+  InputFunctions.cpp
+  GameEngine.cpp
+c:\users\cden0003\source\repos\heros-quest\heros quest\player.h(22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\cden0003\source\repos\heros-quest\heros quest\gameengine.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Combat.cpp
+c:\users\cden0003\source\repos\heros-quest\heros quest\player.h(22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\cden0003\source\repos\heros-quest\heros quest\combat.cpp(95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Character.cpp
+  Generating Code...
+  LINK : C:\Users\cden0003\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.exe not found or not built by the last incremental link; performing full link
+  Heros Quest.vcxproj -> C:\Users\cden0003\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.exe
+  Heros Quest.vcxproj -> C:\Users\cden0003\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.pdb (Partial PDB)
