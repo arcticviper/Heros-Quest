@@ -1,21 +1,22 @@
 #include "Player.h"
 #include <iostream>
 using namespace std;
-
+//default player constructor
 Player::Player () : Character(){
 	intPrizeMoney = 0;
 	intSpecialAttack = 0;
 	boolUsedSpecialAttack = false;
 }
-
+//playerconstructor that includes name, health, attack, defence, specialattack
 Player::Player(string name, int health, int attack, int defence, int specialAttack) : Character(name, health, attack, defence){
 	intPrizeMoney = 0;
 	intSpecialAttack = specialAttack;
 	boolUsedSpecialAttack = false;
 }
-
+//executes special attack and marks special attack as used
 int Player::specialAttack(){
 	boolUsedSpecialAttack = true;
+	cout << getName() <<" uses their special attack." << endl;
 	return (Player::characterAttack() + intSpecialAttack);
 }
 
@@ -45,6 +46,7 @@ void Player::addStats(int health, int attack, int defence, int specialAttack){
 	replaceStats(intHealthCap, intAttackCap, intDefenceCap, intSpecialAttackCap);
 }
 
+//used for increasing stats for a turn.
 void Player::buffStats(int health, int attack, int defence, int specialAttack,bool isTemp){
 	//if not perm, store stats in buff vector before changing
 	if (isTemp == true) {
@@ -79,6 +81,7 @@ void Player::replaceStats(int health, int attack, int defence, int specialAttack
 	replaceStatsNoCap(health, attack, defence, specialAttack);
 }
 
+//same as above but without a limit
 void Player::replaceStatsNoCap(int health, int attack, int defence, int specialAttack){
 	intHealth = health;
 	intAttack = attack;
@@ -95,10 +98,10 @@ int Player::playerDodge(){
 	return Player::intDefence + dodgeBuff;
 }
 
+//adds a temporary buff
 void Player::addBuffs(int intHPBuff, int intATKBuff, int intDEFBuff, int intSPATKBuff){
 	//stores buffs in buff vector
 	buffStats(intHPBuff, intATKBuff, intDEFBuff, intSPATKBuff,true);
-	//adds stats to no
 }
 
 void Player::resetBuffs(){
@@ -129,6 +132,7 @@ void Player::useItem(int elementNumber){
 	
 }
 
+//displays item in bag
 void Player::displayItem(){
 	cout << "Displaying items: " << endl;
 	for (int i = 0; i < bag.size(); i++) {
@@ -137,15 +141,18 @@ void Player::displayItem(){
 	cout << endl;
 }
 
+//adds item into bag
 void Player::addItem(Item newItem){
 	bag.push_back(newItem);
 	cout << "The new item: " << newItem.getName() << " has been added to your inventory." << endl;
 }
 
+//adds money into storage
 void Player::addMoney(int money){
 	intPrizeMoney = intPrizeMoney + money;
 }
 
+//different output for players
 void Player::takeDamage(int damage)
 {
 	int intDefence = characterDefend();

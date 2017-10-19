@@ -5,7 +5,7 @@
 
 class SaveLoad{
 public:
-	bool SaveGame();
+	bool SaveGame(); //unimplemented save and load function
 	bool LoadGame();
 private:
 };

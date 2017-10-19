@@ -143,6 +143,7 @@ void Combat::playerCombat(Player thePlayer, int intPlayer){
 		case 5: // use item
 			thePlayer.displayItem();
 			cout << "0. Cancel" << endl;
+			//returns if an item is not used.
 			if (itemMenu(thePlayer, intPlayer) == false) {
 				break;
 			}

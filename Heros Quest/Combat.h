@@ -23,7 +23,7 @@ private:
 	//void monsterCombat(); //Manages AI combat
 	std::vector<Player> playerParty; //for holding players to easier manage players
 	std::vector<Monster> monsterParty; //for holding monsters to easier manage monsters
-	bool itemMenu(Player thePlayer, int intPlayer);
+	bool itemMenu(Player thePlayer, int intPlayer); //manages how players use items
 	
 };
 

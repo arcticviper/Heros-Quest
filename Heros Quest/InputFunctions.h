@@ -1,6 +1,6 @@
 #ifndef INPUTFUNCTIONS_H
 #define INPUTFUNCTIONS_H
-
+//managing input (string, character, integer)
 #include <iostream>
 #include <string>
 

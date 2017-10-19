@@ -4,6 +4,7 @@
 #include <sstream>
 using namespace std;
 
+//default player constructor
 Character::Character()
 {
 	intHealth = 0;
@@ -11,8 +12,9 @@ Character::Character()
 	intAttack = 0;
 	intDefence = 0;
 	intSpecialAttack = 0;
+	boolUsedSpecialAttack = false;
 }
-
+//player constructor that takes health, attack and defence as input
 Character::Character(string name, int health, int attack, int defence)
 {
 	intHealth = health;
@@ -20,8 +22,9 @@ Character::Character(string name, int health, int attack, int defence)
 	intAttack = attack;
 	intDefence = defence;
 	intSpecialAttack = 0;
+	boolUsedSpecialAttack = false;
 }
-
+//runs attack allowing for minimum and plus values
 int Character::characterAttack(int intMin, int intMax)
 {
 	int damage = 0;
@@ -29,12 +32,12 @@ int Character::characterAttack(int intMin, int intMax)
 	damage = damage + intAttack;
 	return damage;
 }
-
+//default attack from spec
 int Character::characterAttack()
 {
 	return characterAttack(1, 6);
 }
-
+//runs the defecne allowing for minimum and plus values
 int Character::characterDefend(int intMin, int intMax)
 {
 	int defence = 0;
@@ -42,12 +45,12 @@ int Character::characterDefend(int intMin, int intMax)
 	defence = defence + intDefence;
 	return defence;
 }
-
+//default defence from spec
 int Character::characterDefend()
 {
 	return characterDefend(1, 6);
 }
-
+//displays the chatacters stats
 string Character::displayStats() {
 	stringstream sstream;
 	sstream << "Name: " << Character::getName();
@@ -59,7 +62,7 @@ string Character::displayStats() {
 	return sstream.str();
 }
 
-
+//takes damage if the damage is higher than the characters defence
 void Character::takeDamage(int damage) {
 	int intDefence = characterDefend();
 	if (damage > intDefence) {
@@ -74,7 +77,7 @@ void Character::takeDamage(int damage) {
 		cout << "You missed!" << endl;
 	}
 }
-
+//resets the special attack
 void Character::resetSpecial() {
 	boolUsedSpecialAttack = false;
 }

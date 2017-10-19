@@ -66,10 +66,10 @@ void GameEngine::PlayGame(){
 
 void GameEngine::Basic(){
 	//populate enemies
-	Monsters.push_back(new Monster(getMonsterName(0), 10, 1, 1, 0));
-	Monsters.push_back(new Monster(getMonsterName(1), 20, 3, 2, 0));
-	Monsters.push_back(new Monster(getMonsterName(2), 30, 5, 4, 0));
-	Monsters.push_back(new Monster(getMonsterName(3), 40, 6, 7, 0));
+	Monsters.push_back(new Monster(getMonsterName(0), 10, 1, 1));
+	Monsters.push_back(new Monster(getMonsterName(1), 20, 3, 2));
+	Monsters.push_back(new Monster(getMonsterName(2), 30, 5, 4));
+	Monsters.push_back(new Monster(getMonsterName(3), 40, 6, 7));
 	Monsters.push_back(new Monster(getMonsterName(4), 50, 8, 8, 5));
 	//get player name
 	string PlayerName = makeStringChoice("What is your name?");
@@ -143,10 +143,10 @@ void GameEngine::Basic(){
 
 void GameEngine::Easy(){
 	//populate enemies
-	Monsters.push_back(new Monster(getMonsterName(0), 10, 1, 1, 0));
-	Monsters.push_back(new Monster(getMonsterName(1), 20, 3, 2, 0));
-	Monsters.push_back(new Monster(getMonsterName(2), 30, 5, 4, 0));
-	Monsters.push_back(new Monster(getMonsterName(3), 40, 6, 7, 0));
+	Monsters.push_back(new Monster(getMonsterName(0), 10, 1, 1));
+	Monsters.push_back(new Monster(getMonsterName(1), 20, 3, 2));
+	Monsters.push_back(new Monster(getMonsterName(2), 30, 5, 4));
+	Monsters.push_back(new Monster(getMonsterName(3), 40, 6, 7));
 	Monsters.push_back(new Monster(getMonsterName(4), 50, 8, 8, 5));
 	//get player name/add 4 players
 	stringstream sstream;
@@ -536,17 +536,17 @@ void GameEngine::FillNames()
 	Name[4].push_back("King Red Dragon");
 	Name[4].push_back("King Black Dragon");
 }
-
+//get a random number ranging from min - (min+minplus)
 int GameEngine::getRandom(int min, int minplus)
 {
 		return rand() % minplus + min;
 }
-
+//gets a random monsters name
 string GameEngine::getMonsterName(int mobLevel)
 {
 	return Name[mobLevel][rand() % Name[mobLevel].size()];
 }
-
+//gets look from loot vector
 Item GameEngine::GetLoot()
 {
 	int intLoot;
@@ -554,7 +554,7 @@ Item GameEngine::GetLoot()
 	Item tempItem = *Loot[intLoot];
 	return tempItem;
 }
-
+//player skill allocation
 Player GameEngine::allocateSkills(Player tempPlayer)
 {
 	int intSkills;
@@ -573,6 +573,7 @@ Player GameEngine::allocateSkills(Player tempPlayer)
 		skillChoice = makeIntChoice("Which skill would you like to allocate your points to? (Max is 10)", 1, 3);
 		switch (skillChoice){
 		case 1:
+			//doesn't use skill point if skill is maxed
 			if (tempPlayer.getAttack() == 10) {
 				cout << "You already have max attack stats." << endl;
 			}
@@ -586,6 +587,7 @@ Player GameEngine::allocateSkills(Player tempPlayer)
 			}
 			break;
 		case 2:
+			//doesn't use skill point if skill is maxed
 			if (tempPlayer.getDefence() == 10) {
 				cout << "You already have max defence stats." << endl;
 			}
@@ -599,6 +601,7 @@ Player GameEngine::allocateSkills(Player tempPlayer)
 			}
 			break;
 		case 3:
+			//doesn't use skill point if skill is maxed
 			if (tempPlayer.getSpecialAttack() == 10) {
 				cout << "You already have max special attack stats." << endl;
 			}
@@ -624,10 +627,10 @@ Player GameEngine::allocateSkills(Player tempPlayer)
 	return tempPlayer;
 }
 
-int main() {
-	GameEngine newGame;
-	newGame.PlayGame();
-
-	system("pause");
-	return 0;
-}
+//int main() {
+//	GameEngine newGame;
+//	newGame.PlayGame();
+//
+//	system("pause");
+//	return 0;
+//}
