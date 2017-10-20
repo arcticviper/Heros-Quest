@@ -1,11 +1,5 @@
-﻿  Main.cpp
-c:\users\cden0003\source\repos\heros-quest\heros quest\player.h(20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  GameEngine.cpp
-c:\users\cden0003\source\repos\heros-quest\heros quest\player.h(20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-c:\users\cden0003\source\repos\heros-quest\heros quest\gameengine.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  Player.cpp
-  Combat.cpp
-  Heros Quest.vcxproj -> C:\Users\cden0003\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.exe
-  Heros Quest.vcxproj -> C:\Users\cden0003\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.pdb (Partial PDB)
+﻿  GameEngine.cpp
+c:\users\charles\source\repos\heros-quest\heros quest\player.h(20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\charles\source\repos\heros-quest\heros quest\gameengine.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Heros Quest.vcxproj -> C:\Users\Charles\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.exe
+  Heros Quest.vcxproj -> C:\Users\Charles\Source\Repos\Heros-Quest\x64\Debug\Heros Quest.pdb (Partial PDB)

@@ -109,7 +109,7 @@ void GameEngine::Basic(){
 			//delete pointer location
 			delete Monsters[0];
 			//removes monster from monsters vector
-			Monsters.clear();
+			Monsters.erase(Monsters.begin());
 		}
 		//give player skills to add
 		SinglePlayer[0] = allocateSkills(SinglePlayer[0]);
@@ -184,6 +184,9 @@ void GameEngine::Easy(){
 			}
 			cout << "Your final score was: " << totalScore << endl;
 			//removes players
+			for (int i = 0; i < Players.size(); i++) {
+				delete Players[i];
+			}
 			Players.clear();
 			break;
 		}
@@ -324,7 +327,7 @@ void GameEngine::Normal()
 				delete Monsters[i];
 			}
 			//removes 4 monsters from monsters vector
-			Monsters.erase(Monsters.begin(), Monsters.begin()+4);
+			Monsters.erase(Monsters.begin(), Monsters.begin() + 4);
 		}
 		//give player skills to add
 		for (int i = 0; i < PlayerTeam.size(); i++) {
