@@ -262,7 +262,7 @@ void GameEngine::Normal()
 	}
 	for (int i = 0; i < 4; i++) {
 		//creates monster with hp ranging from 35-45, atk stats ranging from 5-7,def stats ranging 5-7 and sp atk stats ranging 2-3
-		Monsters.push_back(new Monster(getMonsterName(3), getRandom(35, 10), getRandom(5, 7), getRandom(5, 7), getRandom(2, 1)));
+		Monsters.push_back(new Monster(getMonsterName(3), getRandom(35, 10), getRandom(5, 2), getRandom(5, 2), getRandom(2, 1)));
 	}
 	for (int i = 0; i < 4; i++) {
 		//creates monster with hp ranging from 45-55, atk stats ranging from 7-9,def stats ranging 7-9 and sp atk stats ranging 3-6
@@ -505,8 +505,11 @@ void GameEngine::FillLoot(){
 	Items.insert(Items.end(), Potions.begin(), Potions.end());
 	Items.insert(Items.end(), Armour.begin(), Armour.end());
 	Items.insert(Items.end(), Weapons.begin(), Weapons.end());
-
+	Potions.clear();
+	Armour.clear();
+	Weapons.clear();
 	Loot.insert(Loot.end(), Items.begin(), Items.end());
+	Items.clear();
 }
 
 void GameEngine::FillNames()
